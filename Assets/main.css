@@ -1,0 +1,90 @@
+/* ---- reset ---- */
+
+html {
+  box-sizing: border-box;
+  overflow: hidden;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Typography */
+
+h1{
+  font-family: 'Ewert', cursive;
+}
+
+h2, p {
+  text-transform: capitalize;
+}
+
+a, h2, p {
+  font-family: 'Kaushan Script', cursive;
+  text-decoration: none;
+}
+
+/* Layout */
+
+body {
+  background-image: url(../Assets/Image/Background.jpeg); 
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.container {
+  background-color: rgba(237, 201, 175, 0.6);
+  width: 80vw;
+  height: 600px;
+  margin: 10% 10%;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.button {
+  padding: 1rem 4rem;
+  color: white;
+  background-color: sandybrown;
+  font-size: 2rem;
+}
+/* Splash */
+
+.game-title {
+  text-align: center;
+  font-size: 10rem;
+  padding-top: 7rem;
+  padding-bottom: 3rem;
+}
+
+/* Final */
+
+.final-screen {
+  width: 80vw;
+  height: 600px;
+  text-align: center;
+}
+
+.header {
+  padding-top: 1rem;
+}
+
+.game-over {
+  font-size: 7rem;
+  margin-bottom: 0;
+}
+
+.result {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.replay {
+  font-size: 2.5rem;
+}

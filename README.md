@@ -20,6 +20,7 @@ It will consist on three screens, the splash screen, canvas game and Game Over.
 * Random decoration
 * Powerup items.
 * Levels.
+* Favicon
 * Flip color.
 * Cheat commands.
 * Count down from three before starting.
@@ -45,6 +46,12 @@ StartGame() {
   var canvas;
   var keyDown;
   game.start();
+  buildSplash();
+  destroySplash();
+  buildGame();
+  destroyGame();
+  buildGameOver();
+  destroyGameOver();
 
   //event listeners for the key presses
 
@@ -53,47 +60,49 @@ StartGame() {
 //Classes:
 
 Game () {
-  self.canvas;
-  self.ctx;
-  self.player;
-  self.particles;
-  self.animation;
+  this.canvas;
+  this.ctx;
+  this.player;
+  this.particles;
 
-  self.clearCanvas();
-  self.drawCanvas();
-  self.updateGame();
-  self.createParticles();
-  self.start();
+  this.clearCanvas();
+  this.drawCanvas();
+  this.updateGame();
+  this.createParticles();
+  this.start();
+  this.onGameOver();
 }
 
 Player () {
-  self.x;
-  self.y;
-  self.size;
-  self.image;
-  self.points;
-  self.playerId;
-  self.speed;
-  self.direction;
+  this.x;
+  this.y;
+  this.size;
+  this.image;
+  this.points;
+  this.playerId;
+  this.speed;
+  this.direction;
+  this.ctx;
 
-  self.setDirection();
-  self.draw();
-  self.update();
-  self.checkCollisions();
-  self.move();
+  this.setDirection();
+  this.draw();
+  this.update();
+  this.checkCollisions();
+  this.move();
 }
 
 Particle () {
-  self.x;
-  self.y;
-  self.size;
-  self.image;
-  self.type;
+  this.x;
+  this.y;
+  this.size;
+  this.image;
+  this.type;
+  this.ctx;
 
-  self.appear();
-  self.disappear();
-  self.draw();
-  self.update();
+  this.appear();
+  this.disappear();
+  this.draw();
+  this.update();???
 }
 
 //Particles children
@@ -102,10 +111,11 @@ GoldenNuggets(){};
 Visuals(){};
 
 Timer () {
-  self.startTimer();
-  self.setMinutes();
-  self.setSeconds();
-  self.stopTimer();
+  this.startTime;
+  this.startTimer();
+  this.setMinutes();
+  this.setSeconds();
+  this.stopTimer();
 }
 
 ```
@@ -113,9 +123,12 @@ Timer () {
 ## Tasks
 
 1. File structure
+16. Screens html and css
 2. Game screen and canvas
+15. Stop game (game over)
+17. Screens transition
 3. Start game and game loop logic
-4. Constructors and properties for every object class
+4. Constructors and properties for player
 5. Draw and Update logic
 6. Draw and update logic for player
 7. Key binds for controls
@@ -126,9 +139,6 @@ Timer () {
 12. Debug collisions
 13. Particles dissapearing
 14. Timer
-15. Stop game (game over)
-16. Screens html and css
-17. Screens transition
 
 ## Technologies
 
