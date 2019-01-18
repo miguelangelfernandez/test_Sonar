@@ -54,10 +54,6 @@ function main() {
 
   
   function buildGameScreen() {
-    function printTime() {
-      printMinutes();
-      printSeconds();
-    }
     var gameScreen = `<div class="buttons-container">
     <div class="button">
       <span id="player1Points">10</span>
@@ -99,10 +95,16 @@ function main() {
       secUni.textContent = game.timer.seconds[1];
     }
 
+    function printTime() {
+      printMinutes();
+      printSeconds();
+    }
+
     game.timer.startTimer();
 
     game.start();
-  
+
+    setTimeout(buildGameOverScreen.bind(this), 121000);
   }
 
   //Key events Player 1
