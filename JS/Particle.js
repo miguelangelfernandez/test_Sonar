@@ -1,7 +1,7 @@
-function Particles(canvas) {
+function Particle(canvas, x, y) {
   this.ctx = canvas.getContext('2d');
-  this.x;
-  this.y;
+  this.x = x;
+  this.y = y;
   this.size = 20;
   this.image;
   this.type;
@@ -13,6 +13,4 @@ function Particles(canvas) {
   this.disappear = function() {
     this.x = -999;
   };
-
-  this.update();
 }

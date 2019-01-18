@@ -10,6 +10,14 @@ function main() {
     return container;
   }
 
+  // Start main Screen
+
+  function loadGame() {
+    buildSplashScreen();
+  }
+
+  loadGame()
+
   function buildSplashScreen() {
     var splashScreen = `<h1 class='game-title'>Gold Rush</h1>
     <div class='buttons-container'>
@@ -24,35 +32,8 @@ function main() {
     player1.addEventListener('click', buildGameScreen);
   }
 
-
-  function buildGameOverScreen() {
-    var gameOverScreen = `<div class='final-screen'>
-    <div class='header'>
-    <h1 class='game-over'>Game Over</h1>
-    <h2 id='result' class='result'>Player 1 Won with 150 Points!</h2>
-    <a id='replay' class='replay'>Insert Coin</a>
-    </div>
-    <div class='ranking'></div>
-    </div>`;
-
-    buildDom(gameOverScreen);
-
-    var replay = document.getElementById('replay');
-    replay.addEventListener('click', buildSplashScreen);
-  }
-
-  // Start main Screen
-
-  function loadGame() {
-    buildSplashScreen();
-  }
-
-  loadGame()
-
   //Start Game
 
-
-  
   function buildGameScreen() {
     var gameScreen = `<div class="buttons-container">
     <div class="button">
@@ -71,7 +52,7 @@ function main() {
         <span>Points</span>
     </div>
     </div>
-    <canvas id='canvas' class='canvas' width='940px' height='520px'></canvas>`;
+    <canvas id="canvas" class="canvas" width="1490px" height="520px"></canvas>`;
 
     buildDom(gameScreen);
 
@@ -104,12 +85,28 @@ function main() {
 
     game.start();
 
-    setTimeout(buildGameOverScreen, 121000);
+    setTimeout(buildGameOverScreen, 1210000);
   }
 
   //Key events Player 1
 
+  // Finish game
 
+  function buildGameOverScreen() {
+    var gameOverScreen = `<div class="final-screen">
+    <div class="header">
+    <h1 class="game-over">Game Over</h1>
+    <h2 id="result" class="result">Player 1 Won with 150 Points!</h2>
+    <a id="replay" class="replay">Insert Coin</a>
+    </div>
+    <div class='ranking'></div>
+    </div>`;
+
+    buildDom(gameOverScreen);
+
+    var replay = document.getElementById('replay');
+    replay.addEventListener('click', buildSplashScreen);
+  }
 
 }
 
