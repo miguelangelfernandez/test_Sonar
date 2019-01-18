@@ -19,7 +19,7 @@ h1{
   font-family: 'Ewert', cursive;
 }
 
-a, h2 {
+a, h2, span {
   font-family: 'Kaushan Script', cursive;
   text-decoration: none;
   text-transform: capitalize;

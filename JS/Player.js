@@ -2,14 +2,14 @@
 
 function Player(canvas) {
   this.ctx = canvas.getContext('2d');
-  this.x = 100;
-  this.y = 100;
+  this.x = 500;
+  this.y = 200;
   this.size = 50;
   this.characterIcon;
   this.points;
   this.playerID = 'player1';
-  this.speed;
-  this.direction;
+  this.speed = 2;
+  this.direction = 'E';
 }
 
 Player.prototype.draw = function() {

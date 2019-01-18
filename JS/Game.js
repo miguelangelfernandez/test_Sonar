@@ -17,7 +17,6 @@ Game.prototype.drawCanvas = function() {
 }
 
 Game.prototype.updateGame = function() {
-  this.player.x++;
 }
 
 Game.prototype.createParticles = function() {
