@@ -23,7 +23,7 @@ Game.prototype.updateGame = function() {
 
 Game.prototype.createParticles = function() {
   if(Math.floor(Math.random() > 0.95)) {
-    this.particles.push(new Particle());
+    this.particles.push(new Particle(canvas));
   };
 
 };

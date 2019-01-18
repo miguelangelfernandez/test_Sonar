@@ -104,7 +104,7 @@ function main() {
 
     game.start();
 
-    setTimeout(buildGameOverScreen.bind(this), 121000);
+    setTimeout(buildGameOverScreen, 121000);
   }
 
   //Key events Player 1
