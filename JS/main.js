@@ -1,22 +1,13 @@
 'use strict';
 
-var instructions = document.getElementById('instructions');
-var player2 = document.getElementById('player2');
-var result = document.getElementById('result');
-  
+// BuildDom sections
+
+
 function buildDom(domHtml) {
   var container = document.getElementById('container');
   container.innerHTML = domHtml;
 
   return container;
-}
-
-function destroyDom(container) {
-  container.innerHTML = "";
-}
-
-function startGame() {
-  buildSplashScreen();
 }
 
 function buildSplashScreen() {
@@ -28,8 +19,8 @@ function buildSplashScreen() {
   </div>`;
 
   buildDom(splashScreen);
-  
-  player1.addEventListener("click", function() {
+
+  player1.addEventListener("click", function () {
     buildGameScreen();
   });
 }
@@ -42,15 +33,15 @@ function buildGameScreen() {
   </div>`;
 
   buildDom(gameScreen);
-  
+
   // For testing only
   var counter = 0;
-  var interval = setInterval(function() {
+  var interval = setInterval(function () {
     counter++;
     console.log(counter);
   }, 1000);
 
-  setTimeout(function() {
+  setTimeout(function () {
     clearInterval(interval);
     buildGameOverScreen();
   }, 5000);
@@ -65,13 +56,19 @@ function buildGameOverScreen() {
   </div>
   <div class="ranking"></div>
   </div>`;
-  
+
   buildDom(gameOverScreen);
 
   var replay = document.getElementById('replay');
-  replay.addEventListener("click", function() {
+  replay.addEventListener("click", function () {
     buildSplashScreen();
   });
+}
+
+// DestroyDom sections
+
+function destroyDom(container) {
+  container.innerHTML = "";
 }
 
 function destroySplashScreen(splashScreen) {
@@ -86,5 +83,10 @@ function destroyGameOverScreen(gameOverScreen) {
   destroyDom(gameOverScreen);
 }
 
+// Start game
 
-window.addEventListener('load', startGame);
+function startGame() {
+  buildSplashScreen();
+}
+
+window.addEventListener('load', startGame());
