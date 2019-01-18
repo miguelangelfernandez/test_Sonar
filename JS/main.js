@@ -30,7 +30,8 @@ function buildGameScreen() {
   <a class="button" href="#">10 points</a>
   <a class="button" href="#">02:00</a>
   <a class="button" href="#">10 points</a>
-  </div>`;
+  </div>
+  <canvas id="canvas" class="canvas" width="800px" height="500px"></canvas>`;
 
   buildDom(gameScreen);
 
