@@ -24,7 +24,7 @@ function main() {
     player1.addEventListener('click', buildGameScreen);
   }
 
-  
+
   function buildGameOverScreen() {
     var gameOverScreen = `<div class='final-screen'>
     <div class='header'>
@@ -34,35 +34,41 @@ function main() {
     </div>
     <div class='ranking'></div>
     </div>`;
-    
+
     buildDom(gameOverScreen);
-    
+
     var replay = document.getElementById('replay');
     replay.addEventListener('click', buildSplashScreen);
   }
-  
+
   // Start main Screen
-  
+
   function loadGame() {
     buildSplashScreen();
   }
-  
+
   loadGame()
 
   //Start Game
 
+
+  
   function buildGameScreen() {
+    function printTime() {
+      printMinutes();
+      printSeconds();
+    }
     var gameScreen = `<div class="buttons-container">
     <div class="button">
-      <span class="player1Points">10</span>
+      <span id="player1Points">10</span>
       <span>Points</span>
     </div>
     <div class="button">
-      <span class="minDec">0</span>
-      <span class="minUni">2</span>
+      <span id="minDec">0</span>
+      <span id="minUni">2</span>
       <span>:</span>
-      <span class="secDec">0</span>
-      <span class="secUni">0</span>
+      <span id="secDec">0</span>
+      <span id="secUni">0</span>
     </div>
     <div class="button">
         <span class="player2Points">10</span>
@@ -70,26 +76,33 @@ function main() {
     </div>
     </div>
     <canvas id='canvas' class='canvas' width='940px' height='520px'></canvas>`;
-    
+
     buildDom(gameScreen);
-    
+
     var canvas = document.getElementById('canvas');
-    var game = new Game(canvas);
-    
+    var game = new Game(canvas, printTime);
+
+    //Timer
+
+    var minDec = document.getElementById('minDec');
+    var minUni = document.getElementById('minUni');
+    var secDec = document.getElementById('secDec');
+    var secUni = document.getElementById('secUni');
+
+    function printMinutes() {
+      minDec.textContent = game.timer.minutes[0];
+      minUni.textContent = game.timer.minutes[1];
+    }
+
+    function printSeconds() {
+      secDec.textContent = game.timer.seconds[0];
+      secUni.textContent = game.timer.seconds[1];
+    }
+
+    game.timer.startTimer();
+
     game.start();
-
-    
-    // For testing only
-    var counter = 0;
-    var interval = setInterval(function () {
-      counter++;
-      console.log(counter);
-    }, 1000);
-
-    setTimeout(function () {
-      clearInterval(interval);
-      buildGameOverScreen();
-    }, 120000);
+  
   }
 
   //Key events Player 1

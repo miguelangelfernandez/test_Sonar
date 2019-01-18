@@ -3,11 +3,15 @@ function Timer() {
   this.intervalId = 0;
   this.minutes;
   this.seconds;
+  this.updateTimeDom;
 }
 
 Timer.prototype.startTimer = function() {
   this.intervalId = setInterval(function() {
     this.timeLeft--;
+    this.setTime();
+    this.updateTimeDom();
+
   }.bind(this), 1000);
 }
 
@@ -36,3 +40,7 @@ Timer.prototype.stopTimer = function() {
   this.minutes = 0;
   this.seconds = 0;
 };
+
+Timer.prototype.changeTime = function(printTime) {
+  this.updateTimeDom = printTime;
+}

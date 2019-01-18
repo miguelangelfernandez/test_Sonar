@@ -1,9 +1,12 @@
 'use strict';
 
-function Game(canvas){
+function Game(canvas, printTime){
   this.canvas = canvas;
   this.ctx = canvas.getContext('2d');
   this.player = new Player(canvas);
+  this.timer = new Timer();
+  this.timer.changeTime(printTime)
+
   this.particles = [];
   this.animation;
 }
