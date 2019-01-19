@@ -24,13 +24,20 @@ Game.prototype.drawCanvas = function () {
 Game.prototype.updateGame = function () {
   this.player.updatePlayer();
   this.createParticles();
+
   this.particles = this.particles.filter(function(particle) {
     return particle.isInScreen();
   });
+
+  this.particles.forEach(function(particle) {
+    if(this.player.checkCollisions(particle)) {
+      particle.dissapear();
+    };
+  }.bind(this));
 }
 
 Game.prototype.createParticles = function () {
-  if (this.particles.length < 55) {
+  if (this.particles.length < 15) {
     var x = Math.random() * canvas.width;
     var y = Math.random() * canvas.height;
 

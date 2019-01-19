@@ -84,11 +84,10 @@ document.body.addEventListener("keyup", function(e) {
 });
 
 Player.prototype.checkCollisions = function(particle) {
-  var collisionRight = this.x + this.size / 2 > particle.y - particle.size / 2;
-  var collisionLeft = this.x - this.size / 2 < particle.y + particle.size / 2;
-  var collisionTop = this.x - this.size / 2 < particle.y+ particle.size / 2;
-  var collisionBottom = this.x + this.size / 2 > particle.y - particle.size / 2;
-
-  return collisionRight && collisionLeft && collisionTop && collisionBottom;
+  if ((this.x <= particle.x && this.x + this.size >= particle.x) &&
+  (this.y <= particle.y && this.y + this.size >= particle.y)) {
+    return true;
+  }
+  return false;
 }
 
