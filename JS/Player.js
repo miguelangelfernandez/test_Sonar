@@ -2,17 +2,16 @@
 
 function Player(canvas) {
   this.ctx = canvas.getContext('2d');
-  this.x = 500;
-  this.y = 200;
+  this.x = 50;
+  this.y = 100;
   this.velocityY = 0;
   this.velocityX = 0;
-  this.speed = 2;
+  this.maxSpeed = 2;
   this.friction = 0.98;
   this.size = 50;
   this.characterIcon;
   this.points;
   this.playerID = 'player1';
-  this.direction = 'E';
 }
 
 Player.prototype.draw = function() {
@@ -23,35 +22,34 @@ var keys = [];
 
 Player.prototype.updatePlayer = function() {
   if (keys[87]) {  //up
-    if (this.velocityY > -this.speed) {
+    if (this.velocityY > -this.maxSpeed) {
       console.log('key pressed e.keyCode');
       this.velocityY--;
     }
   }
 
   if (keys[83]) { //down
-    if (this.velocityY < this.speed) {
+    if (this.velocityY < this.maxSpeed) {
       console.log('key pressed e.keyCode');
       this.velocityY++;
     }
   }
 
   if (keys[65]) { //left
-    if (this.velocityX > -this.speed) {
+    if (this.velocityX > -this.maxSpeed) {
       console.log('key pressed e.keyCode');
       this.velocityX--;
     }
   }
 
   if (keys[68]) { //right
-    if (this.velocityX < this.speed) {
+    if (this.velocityX < this.maxSpeed) {
       console.log('key pressed e.keyCode');
       this.velocityX++;
     }
   }
 
   this.movement();
-
 }
 
 Player.prototype.movement = function() {
@@ -59,6 +57,22 @@ Player.prototype.movement = function() {
   this.y += this.velocityY;
   this.velocityX *= this.friction;
   this.x += this.velocityX;
+
+  if (this.x >= canvas.width - this.size) {
+    this.x = this.size;
+  }
+
+  if (this.x <= 0) {
+    this.x = canvas.width - this.size;
+  }
+
+  if (this.y >= canvas.height - this.size) {
+    this.y = this.size;
+  }
+
+  if (this.y <= 0) {
+    this.y = canvas.height - this.size;
+  }
 }
 
 document.body.addEventListener("keydown", function(e) {
