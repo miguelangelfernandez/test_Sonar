@@ -10,8 +10,8 @@ function Player(canvas) {
   this.friction = 0.98;
   this.size = 50;
   this.characterIcon;
-  this.points;
   this.playerID = 'player1';
+  this.points = 0;
 }
 
 Player.prototype.draw = function() {
@@ -23,28 +23,24 @@ var keys = [];
 Player.prototype.updatePlayer = function() {
   if (keys[87]) {  //up
     if (this.velocityY > -this.maxSpeed) {
-      console.log('key pressed e.keyCode');
       this.velocityY--;
     }
   }
 
   if (keys[83]) { //down
     if (this.velocityY < this.maxSpeed) {
-      console.log('key pressed e.keyCode');
       this.velocityY++;
     }
   }
 
   if (keys[65]) { //left
     if (this.velocityX > -this.maxSpeed) {
-      console.log('key pressed e.keyCode');
       this.velocityX--;
     }
   }
 
   if (keys[68]) { //right
     if (this.velocityX < this.maxSpeed) {
-      console.log('key pressed e.keyCode');
       this.velocityX++;
     }
   }
@@ -90,4 +86,7 @@ Player.prototype.checkCollisions = function(particle) {
   }
   return false;
 }
+
+
+
 

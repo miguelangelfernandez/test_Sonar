@@ -37,7 +37,7 @@ function main() {
   function buildGameScreen() {
     var gameScreen = `<div class="buttons-container">
     <div class="button">
-      <span id="player1Points">10</span>
+      <span id="player1-points">10</span>
       <span>Points</span>
     </div>
     <div class="button">
@@ -48,7 +48,7 @@ function main() {
       <span id="secUni">0</span>
     </div>
     <div class="button">
-        <span class="player2Points">10</span>
+        <span class="player2-points">10</span>
         <span>Points</span>
     </div>
     </div>
@@ -57,7 +57,7 @@ function main() {
     buildDom(gameScreen);
 
     var canvas = document.getElementById('canvas');
-    var game = new Game(canvas, printTime, keys);
+    var game = new Game(canvas, printTime, printPoints);
 
     //Timer
 
@@ -81,11 +81,18 @@ function main() {
       printSeconds();
     }
 
+    // Points
+
+    var player1Points = document.getElementById('player1-points');
+    var player2Points = document.getElementById('player2-points');
+
+    function printPoints() {
+      player1Points.textContent = game.player.points;
+    }
+
     game.timer.startTimer();
 
     game.start();
-
-    //Key events Player 1
 
     setTimeout(buildGameOverScreen, 1210000);
   }

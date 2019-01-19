@@ -1,12 +1,13 @@
 'use strict';
 
-function Game(canvas, printTime) {
+function Game(canvas, printTime, printPoints) {
   this.canvas = canvas;
   this.ctx = canvas.getContext('2d');
   this.particles = [];
   this.player = new Player(canvas, keys);
   this.timer = new Timer();
   this.timer.changeTime(printTime);
+  this.printPoints = printPoints;
   this.animation;
 }
 
@@ -24,6 +25,7 @@ Game.prototype.drawCanvas = function () {
 Game.prototype.updateGame = function () {
   this.player.updatePlayer();
   this.createParticles();
+  this.printPoints(this.player);
 
   this.particles = this.particles.filter(function(particle) {
     return particle.isInScreen();
@@ -32,6 +34,7 @@ Game.prototype.updateGame = function () {
   this.particles.forEach(function(particle) {
     if(this.player.checkCollisions(particle)) {
       particle.dissapear();
+      this.player.points++;
     };
   }.bind(this));
 }
@@ -56,6 +59,10 @@ Game.prototype.start = function () {
   };
 
   gameLoop.call(this);
+}
+
+Game.prototype.points = function () {
+
 }
 
 Game.prototype.timeOver = function () {
