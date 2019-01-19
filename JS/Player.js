@@ -83,10 +83,12 @@ document.body.addEventListener("keyup", function(e) {
   keys[e.keyCode] = false;
 });
 
-Player.prototype.checkCollisions = function() {
+Player.prototype.checkCollisions = function(particle) {
+  var collisionRight = this.x + this.size / 2 > particle.y - particle.size / 2;
+  var collisionLeft = this.x - this.size / 2 < particle.y + particle.size / 2;
+  var collisionTop = this.x - this.size / 2 < particle.y+ particle.size / 2;
+  var collisionBottom = this.x + this.size / 2 > particle.y - particle.size / 2;
 
+  return collisionRight && collisionLeft && collisionTop && collisionBottom;
 }
 
-Player.prototype.setDirection = function(direction) {
-
-}

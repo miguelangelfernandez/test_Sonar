@@ -22,8 +22,11 @@ Game.prototype.drawCanvas = function () {
 }
 
 Game.prototype.updateGame = function () {
-  this.createParticles();
   this.player.updatePlayer();
+  this.createParticles();
+  this.particles = this.particles.filter(function(particle) {
+    return particle.isInScreen();
+  });
 }
 
 Game.prototype.createParticles = function () {

@@ -14,3 +14,10 @@ Particle.prototype.draw = function() {
 Particle.prototype.disappear = function() {
   this.x = -999;
 };
+
+Particle.prototype.isInScreen = function() {
+  return this.x >= 0 &&
+          this.x + this.size <= canvas.width &&
+          this.y + this.size < canvas.height &&
+          this.y >= 0;
+}
