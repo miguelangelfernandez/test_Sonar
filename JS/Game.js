@@ -4,7 +4,7 @@ function Game(canvas, printTime) {
   this.canvas = canvas;
   this.ctx = canvas.getContext('2d');
   this.particles = [];
-  this.player = new Player(canvas);
+  this.player = new Player(canvas, keys);
   this.timer = new Timer();
   this.timer.changeTime(printTime);
   this.animation;
@@ -23,6 +23,7 @@ Game.prototype.drawCanvas = function () {
 
 Game.prototype.updateGame = function () {
   this.createParticles();
+  this.player.updatePlayer();
 }
 
 Game.prototype.createParticles = function () {
@@ -51,8 +52,4 @@ Game.prototype.timeOver = function () {
   if (this.timer.timeLeft === 0) {
     this.timer.stopTimer();
   }
-}
-
-Game.prototype.stop = function () {
-  window.cancelAnimationFrame(this.animation)
 }

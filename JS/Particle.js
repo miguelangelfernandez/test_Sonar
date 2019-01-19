@@ -5,12 +5,12 @@ function Particle(canvas, x, y) {
   this.size = 20;
   this.image;
   this.type;
-
-  this.draw = function() {
-    this.ctx.fillRect(this.x, this.y, this.size, this.size);
-  };
-
-  this.disappear = function() {
-    this.x = -999;
-  };
 }
+
+Particle.prototype.draw = function() {
+  this.ctx.fillRect(this.x, this.y, this.size, this.size);
+};
+
+Particle.prototype.disappear = function() {
+  this.x = -999;
+};

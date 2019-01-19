@@ -57,7 +57,7 @@ function main() {
     buildDom(gameScreen);
 
     var canvas = document.getElementById('canvas');
-    var game = new Game(canvas, printTime);
+    var game = new Game(canvas, printTime, keys);
 
     //Timer
 
@@ -85,10 +85,10 @@ function main() {
 
     game.start();
 
+    //Key events Player 1
+
     setTimeout(buildGameOverScreen, 1210000);
   }
-
-  //Key events Player 1
 
   // Finish game
 
