@@ -16,13 +16,15 @@ body {
 /* Typography */
 
 h1{
-  font-family: 'Ewert', cursive;
+  font-family: 'Geostar Fill', cursive;
+  text-transform: capitalize;
 }
 
-a, h2, span {
-  font-family: 'Kaushan Script', cursive;
+a, h2, span, p {
+  font-family: 'Josefin Slab', serif;
   text-decoration: none;
   text-transform: capitalize;
+  color: #00C6FF;
 }
 
 /* Layout */
@@ -34,30 +36,66 @@ body {
 }
 
 .container {
-  background-color: rgba(237, 201, 175, 0.6);
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(237, 201, 175, 0.03);
   width: 1500px;
   height: 700px;
   margin: 10% 10%;
 }
 
-.buttons-container {
-  display: flex;
-  justify-content: space-around;height: 100px;
-}
-
 .button {
   padding: 2rem 3rem;
-  color: white;
-  background-color: sandybrown;
-  font-size: 2rem;
+  font-size: 3rem;
+  font-weight: bold;
+  background-color: azure;
+  border-radius: 50px;
+  opacity: 0.6;
 }
 /* Splash */
 
+.splash-screen-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .game-title {
-  text-align: center;
   font-size: 10rem;
-  padding-top: 7rem;
   padding-bottom: 3rem;
+  color: white;
+  margin-left: 5rem;
+  margin-top: 4rem;
+}
+
+.splash-controls-container {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  width: 40rem;
+  line-height: 1.5;
+  text-align: center;
+  margin: 4rem 2rem 1rem 3rem;
+  font-weight: bold;
+}
+
+.intro {
+  font-size: 2rem;
+  margin-bottom: 7rem;
+}
+
+/* Game */
+
+.markers-container {
+  display: flex;
+  justify-content: space-around;
+  height: 100px;
+}
+
+.markers {
+  padding: 2rem 3rem;
+  font-size: 3rem;
+  font-weight: bold;
 }
 
 /* Final */
@@ -66,15 +104,14 @@ body {
   width: 1500px;
   height: 700px;
   text-align: center;
-}
-
-.header {
-  padding-top: 1rem;
+  display: flex;
+  flex-direction: row;
 }
 
 .game-over {
   font-size: 7rem;
   margin-bottom: 0;
+  color: white;
 }
 
 .result {

@@ -6,8 +6,8 @@ function Player(canvas) {
   this.y = 100;
   this.velocityY = 0;
   this.velocityX = 0;
-  this.maxSpeed = 2;
-  this.friction = 0.98;
+  this.maxSpeed = 7;
+  this.friction = 1;
   this.size = 50;
   this.characterIcon;
   this.playerID = 'player1';

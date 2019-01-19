@@ -19,12 +19,17 @@ function main() {
   loadGame()
 
   function buildSplashScreen() {
-    var splashScreen = `<h1 class="game-title">Gold Rush</h1>
-    <div class="buttons-container">
-      <a id="player1" class="button" href="#">I"m a solo miner</a>
-      <a id="instructions" class="button" href="#">Wanna know how to be rich?</a>
-      <a id="player2" class="button" href="#">We work in pairs</a>
-    </div>`;
+    var splashScreen = `<div class="splash-screen-container">
+    <h1 class="game-title">Gravity Zero</h1>
+    <div class="splash-controls-container">
+      <p class="intro">
+        Collecting space gems is a tough business. Only the most skilled
+        can swimm in the vacumn and survive the dangers it hides. Are you
+        among them?
+      </p>
+      <a id="player1" class="button" href="#">3, 2, 1,... Ejection!</a>
+    </div>
+  </div>`;
 
     buildDom(splashScreen);
 
@@ -35,19 +40,19 @@ function main() {
   //Start Game
 
   function buildGameScreen() {
-    var gameScreen = `<div class="buttons-container">
-    <div class="button">
+    var gameScreen = `<div class="markers-container">
+    <div class="markers">
       <span id="player1-points">10</span>
       <span>Points</span>
     </div>
-    <div class="button">
+    <div class="markers">
       <span id="minDec">0</span>
       <span id="minUni">2</span>
       <span>:</span>
       <span id="secDec">0</span>
       <span id="secUni">0</span>
     </div>
-    <div class="button">
+    <div class="markers">
       <span class="player2-points">10</span>
       <span>Points</span>
     </div>
@@ -94,7 +99,7 @@ function main() {
 
     game.start();
 
-    setTimeout(buildGameOverScreen, 1210000);
+    setTimeout(buildGameOverScreen, 2000);
   }
 
   // Finish game
