@@ -19,11 +19,11 @@ function main() {
   loadGame()
 
   function buildSplashScreen() {
-    var splashScreen = `<h1 class='game-title'>Gold Rush</h1>
-    <div class='buttons-container'>
-    <a id='player1' class='button' href='#'>I'm a solo miner</a>
-    <a id='instructions' class='button' href='#'>Wanna know how to be rich?</a>
-    <a id='player2' class='button' href='#'>We work in pairs</a>
+    var splashScreen = `<h1 class="game-title">Gold Rush</h1>
+    <div class="buttons-container">
+      <a id="player1" class="button" href="#">I"m a solo miner</a>
+      <a id="instructions" class="button" href="#">Wanna know how to be rich?</a>
+      <a id="player2" class="button" href="#">We work in pairs</a>
     </div>`;
 
     buildDom(splashScreen);
@@ -48,11 +48,11 @@ function main() {
       <span id="secUni">0</span>
     </div>
     <div class="button">
-        <span class="player2-points">10</span>
-        <span>Points</span>
+      <span class="player2-points">10</span>
+      <span>Points</span>
     </div>
-    </div>
-    <canvas id="canvas" class="canvas" width="1490px" height="520px"></canvas>`;
+  </div>
+  <canvas id="canvas" class="canvas" width="1500px" height="600px"></canvas>`;
 
     buildDom(gameScreen);
 
@@ -102,12 +102,12 @@ function main() {
   function buildGameOverScreen() {
     var gameOverScreen = `<div class="final-screen">
     <div class="header">
-    <h1 class="game-over">Game Over</h1>
-    <h2 id="result" class="result">Player 1 Won with 150 Points!</h2>
-    <a id="replay" class="replay">Insert Coin</a>
+      <h1 class="game-over">Game Over</h1>
+      <h2 id="result" class="result">Player 1 Won with 150 Points!</h2>
+      <a id="replay" class="replay">Insert Coin</a>
     </div>
-    <div class='ranking'></div>
-    </div>`;
+    <div class="ranking"></div>
+  </div>`;
 
     buildDom(gameOverScreen);
 
