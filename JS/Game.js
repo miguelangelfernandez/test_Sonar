@@ -32,6 +32,10 @@ Game.prototype.updateGame = function () {
   });
 
   this.particles.forEach(function(particle) {
+    particle.updateParticle();
+  });
+
+  this.particles.forEach(function(particle) {
     if(this.player.checkCollisions(particle)) {
       particle.dissapear();
       this.player.points++;
