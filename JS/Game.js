@@ -9,8 +9,21 @@ function Game(canvas, printTime, printPoints) {
   this.timer = new Timer();
   this.timer.changeTime(printTime);
   this.printPoints = printPoints;
-  this.particlesType = ['gem', 'meteorite'];
   this.animation;
+
+  this.particlesCollection = [{
+    type: 'gem',
+    speed: 0.5,
+    src: './Assets/Image/red-crystal.png',
+    size: 20
+  },
+  
+  {
+    type: 'meteorite',
+    speed: 2,
+    src: './Assets/Image/Meteorite.png',
+    size: 80
+  }];
 }
 
 Game.prototype.clearCanvas = function () {
@@ -26,7 +39,7 @@ Game.prototype.drawCanvas = function () {
 
 Game.prototype.updateGame = function () {
   this.player.updatePlayer();
-  this.createParticles();
+  this.createParticles(this.gems, 'gem', 15);
   this.printPoints(this.player);
 
   this.gems = this.gems.filter(function(gem) {
@@ -45,12 +58,12 @@ Game.prototype.updateGame = function () {
   }.bind(this));
 }
 
-Game.prototype.createParticles = function () {
-  if (this.gems.length < 15) {
+Game.prototype.createParticles = function (typeArray, maxNumberInScreen, particleType) {
+  
+  if (typeArray.length < maxNumberInScreen) {
     var x = Math.random() * canvas.width;
     var y = Math.random() * canvas.height;
-
-    this.gems.push(new Particle(canvas, x, y, 'gem'));
+    typeArray.push(new Particle(canvas, x, y, particleType));
   }
 };
 

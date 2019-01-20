@@ -1,12 +1,12 @@
-function Particle(canvas, x, y, type) {
+function Particle(canvas, x, y, particleType) {
   this.ctx = canvas.getContext('2d');
   this.x = x;
   this.y = y;
-  this.speed = 0.5;
-  this.size = 20;
+  this.speed = particleType.speed;
+  this.size = particleType.size;
   this.gemImage = new Image();
-  this.gemImage.src = './Assets/Image/red-crystal.png'
-  this.type = type;
+  this.gemImage.src = particleType.src;
+  this.type = particleType.type;
 }
 
 Particle.prototype.draw = function() {
