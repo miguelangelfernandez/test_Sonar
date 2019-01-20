@@ -1,12 +1,12 @@
-# Gold-Rush
+# Gravity-Zero
 
 ## Description
 
-Gold Rush (name under review) is a timed game where you must catch as many gold as possible and get rich. Once the timer is on you must go get as many gold nuggets as you can and try to avoid the dangers of the desert, especially the pointy cactus.
+Gravity Zero is a timed game where you must catch as many gems as possible while dealing with the complexity of moving in the vacumn. Once the timer is on you must go get as many gems as you can and try to avoid the dangers of space.
 
 ## MVP
 
-The basic game will be based on Canvas technology and will feature a single player level where random items appear an you need to catch as many as possible in a set time avoiding collisions with the objects.
+The basic game will be based on Canvas technology and will feature a single player level where random items appear an you need to catch as many as possible in a set time avoiding collisions with the objects. The movemoent in the canvas will be configured to resemble the moves in zero gravity.
 It will consist on three screens, the splash screen, canvas game and Game Over.
 
 ## Backlog

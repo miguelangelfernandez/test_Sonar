@@ -106,12 +106,23 @@ function main() {
 
   function buildGameOverScreen() {
     var gameOverScreen = `<div class="final-screen">
-    <div class="header">
+    <div class="left-content">
       <h1 class="game-over">Game Over</h1>
-      <h2 id="result" class="result">Player 1 Won with 150 Points!</h2>
-      <a id="replay" class="replay">Insert Coin</a>
+      <h2 id="result" class="result"><span id="winner">Player 1 Won with 150 Points!</h2>
     </div>
-    <div class="ranking"></div>
+    <div class="right-content">
+      <h2 class="ranking-title">Space Ranking</h2>
+      <ol class="ranking">
+        <li class="player-ranking">Anakin 200 Points</li>
+        <li class="player-ranking">Spock 190 Points</li>
+        <li class="player-ranking">Jabbah The Hut 170 Points</li>
+        <li class="player-ranking">Rick 140 Points</li>
+        <li class="player-ranking">Sheppard 120 Points</li>
+        <li class="player-ranking">Paquito 50 Points</li>
+        <li class="player-ranking">Pedro el Panadero 25 Points</li>
+      </ol>
+      <a id="replay" class="replay">Insert credits to go back in Space</a>
+    </div>
   </div>`;
 
     buildDom(gameOverScreen);
