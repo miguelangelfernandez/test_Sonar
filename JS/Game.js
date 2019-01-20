@@ -12,18 +12,19 @@ function Game(canvas, printTime, printPoints) {
   this.animation;
 
   this.particlesCollection = [{
-    type: 'gem',
-    speed: 0.5,
-    src: './Assets/Image/red-crystal.png',
-    size: 20
-  },
-  
-  {
-    type: 'meteorite',
-    speed: 2,
-    src: './Assets/Image/Meteorite.png',
-    size: 80
-  }];
+      type: 'gem',
+      speed: 0.5,
+      src: './Assets/Image/red-crystal.png',
+      size: 20
+    },
+
+    {
+      type: 'meteorite',
+      speed: 2,
+      src: './Assets/Image/Meteorite.png',
+      size: 40
+    }
+  ];
 }
 
 Game.prototype.clearCanvas = function () {
@@ -35,31 +36,51 @@ Game.prototype.drawCanvas = function () {
   this.gems.forEach(function (gem) {
     gem.draw();
   });
+  this.meteorites.forEach(function (meteorite) {
+    meteorite.draw();
+  });
 }
 
 Game.prototype.updateGame = function () {
   this.player.updatePlayer();
-  this.createParticles(this.gems, 'gem', 15);
+  this.createParticles(this.gems, 15, this.particlesCollection[0]);
+  this.createParticles(this.meteorites, 2, this.particlesCollection[1]);
   this.printPoints(this.player);
 
-  this.gems = this.gems.filter(function(gem) {
+  this.gems = this.gems.filter(function (gem) {
     return gem.isInScreen();
   });
 
-  this.gems.forEach(function(gem) {
-    gem.updateParticle();
+  this.meteorites = this.meteorites.filter(function (meteorite) {
+    return meteorite.isInScreen();
   });
 
-  this.gems.forEach(function(gem) {
-    if(this.player.checkCollisions(gem)) {
+
+  this.gems.forEach(function (gem) {
+    if (this.player.checkCollisions(gem)) {
       gem.dissapear();
       this.player.points++;
     };
   }.bind(this));
+
+  this.meteorites.forEach(function (meteorite) {
+    if (this.player.checkCollisions(meteorite)) {
+      meteorite.dissapear();
+      (this.player.points >= 25 ? this.player.points -= 25 : 0);
+    };
+  }.bind(this));
+
+  this.gems.forEach(function (gem) {
+    gem.updateParticle('gem');
+  });
+  
+  this.meteorites.forEach(function (meteorite) {
+    meteorite.updateParticle('meteorite');
+  });
 }
 
 Game.prototype.createParticles = function (typeArray, maxNumberInScreen, particleType) {
-  
+
   if (typeArray.length < maxNumberInScreen) {
     var x = Math.random() * canvas.width;
     var y = Math.random() * canvas.height;
@@ -89,4 +110,3 @@ Game.prototype.timeOver = function () {
     this.timer.stopTimer();
   }
 }
-
