@@ -4,7 +4,7 @@ function Game(canvas, printTime, printPoints) {
   this.canvas = canvas;
   this.ctx = canvas.getContext('2d');
   this.particles = [];
-  this.player = new Player(canvas, keys);
+  this.player = new Player(canvas);
   this.timer = new Timer();
   this.timer.changeTime(printTime);
   this.printPoints = printPoints;
@@ -70,3 +70,4 @@ Game.prototype.timeOver = function () {
     this.timer.stopTimer();
   }
 }
+

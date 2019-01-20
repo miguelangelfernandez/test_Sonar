@@ -3,6 +3,9 @@
 // BuildDom sections
 
 function main() {
+
+  var themeSound = new Sound("./Assets/Sounds/Space-Theme.wav");
+
   function buildDom(domHtml) {
     var container = document.getElementById('container');
     container.innerHTML = domHtml;

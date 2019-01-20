@@ -6,19 +6,20 @@ function Player(canvas) {
   this.y = 100;
   this.velocityY = 0;
   this.velocityX = 0;
-  this.maxSpeed = 7;
+  this.maxSpeed = 10;
   this.friction = 1;
   this.size = 50;
   this.characterIcon;
-  this.playerID = 'player1';
+  this.playerID;
   this.points = 0;
 }
+
+var keys = [];
 
 Player.prototype.draw = function() {
   this.ctx.fillRect(this.x, this.y, this.size, this.size);
 }
 
-var keys = [];
 
 Player.prototype.updatePlayer = function() {
   if (keys[87]) {  //up
@@ -71,11 +72,11 @@ Player.prototype.movement = function() {
   }
 }
 
-document.body.addEventListener("keydown", function(e) {
+window.addEventListener("keydown", function(e) {
   keys[e.keyCode] = true;
 });
 
-document.body.addEventListener("keyup", function(e) {
+window.addEventListener("keyup", function(e) {
   keys[e.keyCode] = false;
 });
 

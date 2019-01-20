@@ -123,7 +123,13 @@ body {
 .left-content, .right-content {
   display: flex;
   flex-direction: column;
+}
 
+.left-content {
+  background-image: url(../Assets/Image/astronaut-background.png);
+  background-repeat: no-repeat;
+  background-size: 50%; 
+  background-position-y: bottom; 
 }
 
 .right-content {
