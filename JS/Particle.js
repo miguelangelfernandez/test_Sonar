@@ -17,7 +17,7 @@ Particle.prototype.draw = function () {
 Particle.prototype.updateParticle = function (particleType) {
   switch (particleType) {
     case 'gem':
-      if (Math.random() > 0.3) {
+      if (Math.random() > 0.6) {
         this.x += this.speed;
       } else {
         this.y += this.speed;

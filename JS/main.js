@@ -4,7 +4,9 @@
 
 function main() {
 
-  var themeSound = new Sound("./Assets/Sounds/Space-Theme.wav");
+  var themeSound = new Audio("./Assets/Sounds/Space-Theme.wav");
+  themeSound.loop = true;
+  themeSound.play();
 
   function buildDom(domHtml) {
     var container = document.getElementById('container');
@@ -15,6 +17,7 @@ function main() {
 
   // Start main Screen
 
+  
   function loadGame() {
     buildSplashScreen();
   }
@@ -35,7 +38,6 @@ function main() {
   </div>`;
 
     buildDom(splashScreen);
-
     var player1 = document.getElementById('player1');
     player1.addEventListener('click', buildGameScreen);
   }

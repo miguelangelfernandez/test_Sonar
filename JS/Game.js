@@ -66,7 +66,7 @@ Game.prototype.updateGame = function () {
   this.meteorites.forEach(function (meteorite) {
     if (this.player.checkCollisions(meteorite)) {
       meteorite.dissapear();
-      (this.player.points >= 25 ? this.player.points -= 25 : 0);
+      (this.player.points >= 5 ? this.player.points -= 5 : this.player.points = 0);
     };
   }.bind(this));
 
