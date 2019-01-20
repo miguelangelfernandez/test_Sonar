@@ -4,12 +4,15 @@ function Player(canvas) {
   this.ctx = canvas.getContext('2d');
   this.x = 50;
   this.y = 100;
+  this.srcX = 32;
+  this.srcY = 0;
   this.velocityY = 0;
   this.velocityX = 0;
-  this.maxSpeed = 10;
+  this.maxSpeed = 5;
   this.friction = 1;
-  this.size = 50;
-  this.characterIcon;
+  this.size = 32;
+  this.characterSpriteSheet = new Image();
+  this.characterSpriteSheet.src = './Assets/Image/astronaut1-sprite.png';
   this.playerID;
   this.points = 0;
 }
@@ -17,35 +20,45 @@ function Player(canvas) {
 var keys = [];
 
 Player.prototype.draw = function() {
-  this.ctx.fillRect(this.x, this.y, this.size, this.size);
+  this.ctx.drawImage(this.characterSpriteSheet, this.srcX, this.srcY, this.size,this.size, this.x, this.y, this.size, this.size);
 }
 
 
 Player.prototype.updatePlayer = function() {
   if (keys[87]) {  //up
+    this.srcY = 96;
+    this.srcX = 32;
     if (this.velocityY > -this.maxSpeed) {
       this.velocityY--;
     }
   }
 
-  if (keys[83]) { //down
+  else if (keys[83]) { //down
+    this.srcY = 0;
+    this.srcX = 64;
     if (this.velocityY < this.maxSpeed) {
       this.velocityY++;
     }
   }
 
-  if (keys[65]) { //left
+  else if (keys[65]) { //left
+    this.srcY = 32;
+    this.srcX = 0;
     if (this.velocityX > -this.maxSpeed) {
       this.velocityX--;
     }
   }
 
-  if (keys[68]) { //right
+  else if (keys[68]) { //right
+    this.srcY = 64;
+    this.srcX = 0;
     if (this.velocityX < this.maxSpeed) {
       this.velocityX++;
     }
+  } else {
+    this.srcX = 32;
+    this.srcY = 0;
   }
-
   this.movement();
 }
 
