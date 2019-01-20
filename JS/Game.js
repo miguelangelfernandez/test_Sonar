@@ -3,11 +3,13 @@
 function Game(canvas, printTime, printPoints) {
   this.canvas = canvas;
   this.ctx = canvas.getContext('2d');
-  this.particles = [];
+  this.gems = []
+  this.meteorites = [];
   this.player = new Player(canvas);
   this.timer = new Timer();
   this.timer.changeTime(printTime);
   this.printPoints = printPoints;
+  this.particlesType = ['gem', 'meteorite'];
   this.animation;
 }
 
@@ -17,8 +19,8 @@ Game.prototype.clearCanvas = function () {
 
 Game.prototype.drawCanvas = function () {
   this.player.draw();
-  this.particles.forEach(function (particle) {
-    particle.draw();
+  this.gems.forEach(function (gem) {
+    gem.draw();
   });
 }
 
@@ -27,28 +29,28 @@ Game.prototype.updateGame = function () {
   this.createParticles();
   this.printPoints(this.player);
 
-  this.particles = this.particles.filter(function(particle) {
-    return particle.isInScreen();
+  this.gems = this.gems.filter(function(gem) {
+    return gem.isInScreen();
   });
 
-  this.particles.forEach(function(particle) {
-    particle.updateParticle();
+  this.gems.forEach(function(gem) {
+    gem.updateParticle();
   });
 
-  this.particles.forEach(function(particle) {
-    if(this.player.checkCollisions(particle)) {
-      particle.dissapear();
+  this.gems.forEach(function(gem) {
+    if(this.player.checkCollisions(gem)) {
+      gem.dissapear();
       this.player.points++;
     };
   }.bind(this));
 }
 
 Game.prototype.createParticles = function () {
-  if (this.particles.length < 15) {
+  if (this.gems.length < 15) {
     var x = Math.random() * canvas.width;
     var y = Math.random() * canvas.height;
 
-    this.particles.push(new Particle(canvas, x, y));
+    this.gems.push(new Particle(canvas, x, y, 'gem'));
   }
 };
 

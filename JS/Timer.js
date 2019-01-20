@@ -1,5 +1,5 @@
 function Timer() {
-  this.timeLeft = 1200;
+  this.timeLeft = 120;
   this.intervalId = 0;
   this.minutes;
   this.seconds;

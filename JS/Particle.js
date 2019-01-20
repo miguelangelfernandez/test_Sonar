@@ -1,16 +1,18 @@
-function Particle(canvas, x, y) {
+function Particle(canvas, x, y, type) {
   this.ctx = canvas.getContext('2d');
   this.x = x;
   this.y = y;
   this.speed = 0.5;
   this.size = 20;
-  this.image = new Image();
-  this.image.src = './Assets/Image/red-crystal.png'
-  this.type;
+  this.gemImage = new Image();
+  this.gemImage.src = './Assets/Image/red-crystal.png'
+  this.type = type;
 }
 
 Particle.prototype.draw = function() {
-  this.ctx.drawImage(this.image, this.x, this.y, this.size, this.size);
+  if(this.type === 'gem') {
+    this.ctx.drawImage(this.gemImage, this.x, this.y, this.size, this.size);
+  }
 };
 
 Particle.prototype.updateParticle = function() {

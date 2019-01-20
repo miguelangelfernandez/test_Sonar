@@ -1,3 +1,5 @@
+'use strict';
+
 function Sound(src) {
   this.sound = document.createElement("audio");
   this.sound.src = src;

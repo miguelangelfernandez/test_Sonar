@@ -102,7 +102,7 @@ function main() {
 
     game.start();
 
-    setTimeout(buildGameOverScreen, 200000);
+    setTimeout(buildGameOverScreen, 120000);
   }
 
   // Finish game
