@@ -1,9 +1,9 @@
 'use strict';
 
 function Game(canvas, printTime, printPoints) {
-  this.presses = [];
   this.canvas = canvas;
   this.ctx = canvas.getContext('2d');
+  this.presses = [];
   this.gems = []
   this.meteorites = [];
   this.player1Src = './Assets/Image/astronaut1-sprite.png';
@@ -13,8 +13,7 @@ function Game(canvas, printTime, printPoints) {
   this.timer = new Timer();
   this.timer.changeTime(printTime);
   this.printPoints = printPoints;
-  this.animation;
-  
+  this.animation;  
   this.particlesCollection = [{
     type: 'gem',
       speed: 0.5,
@@ -57,9 +56,7 @@ Game.prototype.updateGame = function () {
   this.createParticles(this.gems, 15, this.particlesCollection[0]);
   this.createParticles(this.meteorites, 2, this.particlesCollection[1]);
   this.printPoints();
-
   this.gems = this.checkIsInScreen(this.gems);
-
   this.meteorites = this.checkIsInScreen(this.meteorites);
 
   this.gems.forEach(function (gem) {

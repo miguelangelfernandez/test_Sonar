@@ -1,6 +1,7 @@
 'use strict';
 
 function Player(canvas, src, x, y) {
+  this.canvas = canvas;
   this.ctx = canvas.getContext('2d');
   this.x = x;
   this.y = y;
@@ -17,7 +18,7 @@ function Player(canvas, src, x, y) {
 }
 
 Player.prototype.draw = function() {
-  this.ctx.drawImage(this.characterSpriteSheet, this.srcX, this.srcY, this.size,this.size, this.x, this.y, this.size, this.size);
+  this.ctx.drawImage(this.characterSpriteSheet, this.srcX, this.srcY, this.size, this.size, this.x, this.y, this.size, this.size);
 }
 
 Player.prototype.goUp = function() {
@@ -58,20 +59,20 @@ Player.prototype.movement = function() {
   this.velocityX *= this.friction;
   this.x += this.velocityX;
 
-  if (this.x >= canvas.width - this.size) {
+  if (this.x >= this.canvas.width - this.size) {
     this.x = this.size;
   }
 
   if (this.x <= 0) {
-    this.x = canvas.width - this.size;
+    this.x = this.canvas.width - this.size;
   }
 
-  if (this.y >= canvas.height - this.size) {
+  if (this.y >= this.canvas.height - this.size) {
     this.y = this.size;
   }
 
   if (this.y <= 0) {
-    this.y = canvas.height - this.size;
+    this.y = this.canvas.height - this.size;
   }
 }
 

@@ -8,6 +8,9 @@ function main() {
   themeSound.loop = true;
   themeSound.play();
 
+  var pointsP1;
+  var pointsP2;
+
   function buildDom(domHtml) {
     var container = document.getElementById('container');
     container.innerHTML = domHtml;
@@ -105,7 +108,13 @@ function main() {
 
     game.start();
 
-    setTimeout(buildGameOverScreen, 120000);
+    setTimeout(function() {
+      pointsP1 = game.player1.points;
+      pointsP2 = game.player2.points;
+      buildGameOverScreen();
+      return pointsP1, pointsP2;
+
+    }, 120000);
   }
 
   // Finish game
@@ -135,7 +144,7 @@ function main() {
 
     var replay = document.getElementById('replay');
     var winner = document.getElementById('result');
-    (game.player1.points > game.player2.points) ? winner.textContent = `Player 1 Won with ${game.player1.points} Points` : `Player 2 Won with ${game.player2.points} Points`; 
+    (pointsP1 > pointsP2) ? winner.textContent = `Player 1 Won with ${pointsP1} Points` : `Player 2 Won with ${pointsP2} Points`; 
     replay.addEventListener('click', buildSplashScreen);
   }
 
