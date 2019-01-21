@@ -3,7 +3,8 @@
 function Game(canvas, printTime, printPoints) {
   this.canvas = canvas;
   this.ctx = canvas.getContext('2d');
-  this.presses = [];
+  this.player1Presses = [];
+  this.player2Presses = [];
   this.gems = []
   this.meteorites = [];
   this.player1Src = './Assets/Image/astronaut1-sprite.png';
@@ -52,7 +53,8 @@ Game.prototype.checkIsInScreen = function (listItems) {
 }
 
 Game.prototype.updateGame = function () {
-  this.updatePlayerPosition();
+  this.updatePlayer1Position();
+  this.updatePlayer2Position();
   this.createParticles(this.gems, 15, this.particlesCollection[0]);
   this.createParticles(this.meteorites, 2, this.particlesCollection[1]);
   this.printPoints();
@@ -99,57 +101,64 @@ Game.prototype.createParticles = function (typeArray, maxNumberInScreen, particl
   }
 };
 
-Game.prototype.updatePlayerPosition = function() {
-  if (this.presses[87]) {  //up player 1
+Game.prototype.updatePlayer1Position = function() {
+  if (this.player1Presses[87]) {  //up player 1
     this.player1.goUp();
   }
 
-  else if (this.presses[83]) { //down player 1
+  else if (this.player1Presses[83]) { //down player 1
     this.player1.goDown();
   }
 
-  else if (this.presses[65]) { //left player 1
+  else if (this.player1Presses[65]) { //left player 1
     this.player1.goLeft();
   }
 
-  else if (this.presses[68]) { //right player 1
+  else if (this.player1Presses[68]) { //right player 1
     this.player1.goRight();
+
+  } else{
+    this.player1.srcX = 32;
+    this.player1.srcY = 0;
   }
 
-  else if (this.presses[38]) {  //up player 2
+  this.player1.movement();
+}
+
+Game.prototype.updatePlayer2Position = function() {
+  if (this.player2Presses[38]) {  //up player 2
     this.player2.goUp();
   }
 
-  else if (this.presses[40]) { //down player 2
+  else if (this.player2Presses[40]) { //down player 2
     this.player2.goDown();
   }
 
-  else if (this.presses[37]) { //left player 2
+  else if (this.player2Presses[37]) { //left player 2
     this.player2.goLeft();
   }
 
-  else if (this.presses[39]) { //right player 2
+  else if (this.player2Presses[39]) { //right player 2
       this.player2.goRight();
 
   } else {
-    this.player1.srcX = 32;
-    this.player1.srcY = 0;
     this.player2.srcX = 32;
     this.player2.srcY = 0;
   }
 
-  this.player1.movement();
   this.player2.movement();
 }
 
 Game.prototype.start = function () {  
 
   window.addEventListener("keydown", function(e) {
-    this.presses[e.keyCode] = true;
+    this.player1Presses[e.keyCode] = true;
+    this.player2Presses[e.keyCode] = true;
   }.bind(this));
   
   window.addEventListener("keyup", function(e) {
-    this.presses[e.keyCode] = false;
+    this.player1Presses[e.keyCode] = false;
+    this.player2Presses[e.keyCode] = false;
   }.bind(this));
 
   function gameLoop() {
