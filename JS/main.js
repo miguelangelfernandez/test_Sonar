@@ -8,9 +8,6 @@ function main() {
   themeSound.loop = true;
   themeSound.play();
 
-  var pointsP1;
-  var pointsP2;
-
   function buildDom(domHtml) {
     var container = document.getElementById('container');
     container.innerHTML = domHtml;
@@ -109,12 +106,12 @@ function main() {
     game.start();
 
     setTimeout(function() {
-      pointsP1 = game.player1.points;
-      pointsP2 = game.player2.points;
+      // debugger;
+      // pointsP1 = game.player1.points;
+      // pointsP2 = game.player2.points;
       buildGameOverScreen();
-      return pointsP1, pointsP2;
 
-    }, 120000);
+    }, 5000);
   }
 
   // Finish game
@@ -123,7 +120,7 @@ function main() {
     var gameOverScreen = `<div class="final-screen">
     <div class="left-content">
       <h1 class="game-over">Game Over</h1>
-      <h2 id="result" class="result">Player 1 Won with 150 Points!</h2>
+      <h2 id="result" class="result"></h2>
     </div>
     <div class="right-content">
       <h2 class="ranking-title">Space Ranking</h2>
@@ -139,12 +136,13 @@ function main() {
       <a id="replay" class="replay">Insert credits to go back in Space</a>
     </div>
   </div>`;
-
+    var pointsP1 = parseInt(document.getElementById('player1-points').textContent);
+    var pointsP2 = parseInt(document.getElementById('player2-points').textContent);
     buildDom(gameOverScreen);
 
     var replay = document.getElementById('replay');
-    var winner = document.getElementById('result');
-    (pointsP1 > pointsP2) ? winner.textContent = `Player 1 Won with ${pointsP1} Points` : `Player 2 Won with ${pointsP2} Points`; 
+    var result = document.getElementById('result');
+    (pointsP1 > pointsP2) ? result.textContent = `Player 1 Won with ${pointsP1} Points` : result.textContent = `Player 2 Won with ${pointsP2} Points`; 
     replay.addEventListener('click', buildSplashScreen);
   }
 
