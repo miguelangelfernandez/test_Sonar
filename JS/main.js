@@ -4,7 +4,7 @@
 
 function main() {
 
-  var themeSound = new Audio("./Assets/Sounds/Space-Theme.wav");
+  var themeSound = new Audio("./Assets/Sounds/I-Robot2 Loop.wav");
   themeSound.loop = true;
   themeSound.play();
 

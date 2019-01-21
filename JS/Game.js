@@ -41,6 +41,12 @@ Game.prototype.drawCanvas = function () {
   });
 }
 
+// Game.prototype.checkIsInScreen = function (listItems) {
+//   return filteredItems = listItems.filter(function (item){
+//     return item.isInScreen()
+//   })
+// }
+
 Game.prototype.updateGame = function () {
   this.player.updatePlayer();
   this.createParticles(this.gems, 15, this.particlesCollection[0]);
@@ -88,7 +94,9 @@ Game.prototype.createParticles = function (typeArray, maxNumberInScreen, particl
   }
 };
 
-Game.prototype.start = function () {
+Game.prototype.start = function () {  
+
+
   function gameLoop() {
     this.updateGame();
     this.clearCanvas();
