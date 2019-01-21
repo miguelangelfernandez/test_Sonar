@@ -31,7 +31,7 @@ Particle.prototype.updateParticle = function (particleType) {
 }
 
 Particle.prototype.dissapear = function () {
-  this.x = -999;
+    this.x = -999;
 };
 
 Particle.prototype.isInScreen = function () {

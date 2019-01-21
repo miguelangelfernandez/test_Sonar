@@ -15,6 +15,8 @@ function Game(canvas, printTime, printPoints) {
   this.timer.changeTime(printTime);
   this.printPoints = printPoints;
   this.animation;  
+  this.gemAudio = new Audio('./Assets/Sounds/Stapling Paper-SoundBible.com-238116558.wav');
+  this.meteoriteAudio = new Audio('./Assets/Sounds/Comet-Sound.mp3');
   this.particlesCollection = [{
     type: 'gem',
       speed: 0.5,
@@ -63,22 +65,30 @@ Game.prototype.updateGame = function () {
 
   this.gems.forEach(function (gem) {
     if (this.player1.checkCollisions(gem)) {
+      gem.particleImage.src = './Assets/Image/Crystal_01.png';
       gem.dissapear();
+      this.gemAudio.play();
       this.player1.points++;
     }
     else if (this.player2.checkCollisions(gem)) {
+      gem.particleImage.src = './Assets/Image/Crystal_01.png';
       gem.dissapear();
+      this.gemAudio.play();
       this.player2.points++;
     }
   }.bind(this));
 
   this.meteorites.forEach(function (meteorite) {
     if (this.player1.checkCollisions(meteorite)) {
+      meteorite.particleImage.src = './Assets/Image/Explosion_01.png';
+      this.meteoriteAudio.play();
       meteorite.dissapear();
       (this.player1.points >= 5 ? this.player1.points -= 5 : this.player1.points = 0);
     }
     else if (this.player2.checkCollisions(meteorite)) {
+      meteorite.particleImage.src = './Assets/Image/Explosion_01.png';
       meteorite.dissapear();
+      this.meteoriteAudio.play();
       (this.player2.points >= 5 ? this.player2.points -= 5 : this.player2.points = 0);      
     }
   }.bind(this));
