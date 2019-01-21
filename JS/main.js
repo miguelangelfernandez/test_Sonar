@@ -52,9 +52,9 @@ function main() {
     </div>
     <div class="markers">
       <span id="minDec">0</span>
-      <span id="minUni">2</span>
+      <span id="minUni">1</span>
       <span>:</span>
-      <span id="secDec">0</span>
+      <span id="secDec">3</span>
       <span id="secUni">0</span>
     </div>
     <div class="markers">
@@ -111,7 +111,7 @@ function main() {
       // pointsP2 = game.player2.points;
       buildGameOverScreen();
 
-    }, 5000);
+    }, 90000);
   }
 
   // Finish game
