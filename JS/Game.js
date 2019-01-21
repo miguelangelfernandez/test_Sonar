@@ -56,13 +56,11 @@ Game.prototype.updateGame = function () {
   this.updatePlayerPosition();
   this.createParticles(this.gems, 15, this.particlesCollection[0]);
   this.createParticles(this.meteorites, 2, this.particlesCollection[1]);
-  // this.printPoints();
+  this.printPoints();
 
   this.gems = this.checkIsInScreen(this.gems);
 
   this.meteorites = this.checkIsInScreen(this.meteorites);
-  });
-
 
   this.gems.forEach(function (gem) {
     if (this.player1.checkCollisions(gem)) {

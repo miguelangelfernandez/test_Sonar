@@ -6,7 +6,12 @@ function main() {
 
   var themeSound = new Audio("./Assets/Sounds/I-Robot2 Loop.wav");
   themeSound.loop = true;
-  themeSound.play();
+  themeSound.play().then(function(){
+    console.log('music playing')
+  })
+  .catch(function(error) {
+    console.log(error)
+  })
 
   function buildDom(domHtml) {
     var container = document.getElementById('container');
@@ -58,7 +63,7 @@ function main() {
       <span id="secUni">0</span>
     </div>
     <div class="markers">
-      <span class="player2-points">10</span>
+      <span id="player2-points">10</span>
       <span>Points</span>
     </div>
   </div>
@@ -114,7 +119,7 @@ function main() {
     var gameOverScreen = `<div class="final-screen">
     <div class="left-content">
       <h1 class="game-over">Game Over</h1>
-      <h2 id="result" class="result"><span id="winner">Player 1 Won with 150 Points!</h2>
+      <h2 id="result" class="result">Player 1 Won with 150 Points!</h2>
     </div>
     <div class="right-content">
       <h2 class="ranking-title">Space Ranking</h2>
@@ -134,6 +139,7 @@ function main() {
     buildDom(gameOverScreen);
 
     var replay = document.getElementById('replay');
+    var winner = document.getElementById('result'); 
     replay.addEventListener('click', buildSplashScreen);
   }
 
