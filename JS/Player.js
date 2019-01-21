@@ -15,7 +15,6 @@ function Player(canvas) {
   this.characterSpriteSheet.src = './Assets/Image/astronaut1-sprite.png';
   this.playerID;
   this.points = 0;
-  this.key = keys;
 }
 
 var keys = [];
@@ -56,29 +55,6 @@ Player.prototype.goRight = function() {
   }
 }
 
-Player.prototype.updatePlayer = function() {
-  if (keys[87]) {  //up
-    this.goUp();
-  }
-
-  else if (keys[83]) { //down
-    this.goDown();
-  }
-
-  else if (keys[65]) { //left
-    this.goLeft();
-  }
-
-  else if (keys[68]) { //right
-    this.goRight();
-  
-  } else {
-    this.srcX = 32;
-    this.srcY = 0;
-  }
-  this.movement();
-}
-
 Player.prototype.movement = function() {
   this.velocityY *= this.friction;
   this.y += this.velocityY;
@@ -101,14 +77,6 @@ Player.prototype.movement = function() {
     this.y = canvas.height - this.size;
   }
 }
-
-window.addEventListener("keydown", function(e) {
-  keys[e.keyCode] = true;
-});
-
-window.addEventListener("keyup", function(e) {
-  keys[e.keyCode] = false;
-});
 
 Player.prototype.checkCollisions = function(particle) {
   if ((this.x <= particle.x && this.x + this.size >= particle.x) &&

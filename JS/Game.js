@@ -10,6 +10,7 @@ function Game(canvas, printTime, printPoints) {
   this.timer.changeTime(printTime);
   this.printPoints = printPoints;
   this.animation;
+  this.key = [];
 
   this.particlesCollection = [{
       type: 'gem',
@@ -48,7 +49,7 @@ Game.prototype.drawCanvas = function () {
 // }
 
 Game.prototype.updateGame = function () {
-  this.player.updatePlayer();
+  this.updatePlayerPosition();
   this.createParticles(this.gems, 15, this.particlesCollection[0]);
   this.createParticles(this.meteorites, 2, this.particlesCollection[1]);
   this.printPoints(this.player);
@@ -94,8 +95,38 @@ Game.prototype.createParticles = function (typeArray, maxNumberInScreen, particl
   }
 };
 
+Game.prototype.updatePlayerPosition = function() {
+  if (keys[87]) {  //up
+    this.player.goUp();
+  }
+
+  else if (keys[83]) { //down
+    this.player.goDown();
+  }
+
+  else if (keys[65]) { //left
+    this.player.goLeft();
+  }
+
+  else if (keys[68]) { //right
+    this.player.goRight();
+  
+  } else {
+    this.player.srcX = 32;
+    this.player.srcY = 0;
+  }
+  this.player.movement();
+}
+
 Game.prototype.start = function () {  
 
+  window.addEventListener("keydown", function(e) {
+    this.keys[e.keyCode] = true;
+  });
+  
+  window.addEventListener("keyup", function(e) {
+    this.keys[e.keyCode] = false;
+  });
 
   function gameLoop() {
     this.updateGame();
