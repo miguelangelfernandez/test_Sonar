@@ -29,7 +29,7 @@ h2 {
   color: white;
 }
 
-a, span, p, li, ol {
+a, span, p, li, ol, input, ::placeholder {
   font-family: 'Josefin Slab', serif;
   text-decoration: none;
   text-transform: capitalize;
@@ -60,7 +60,7 @@ body {
 }
 
 .button {
-  padding: 2rem 3rem;
+  padding: 1rem 2rem;
   font-size: 3rem;
   font-weight: bold;
   background-color: azure;
@@ -153,7 +153,20 @@ ol.ranking {
 .result {
   font-size: 3rem;
   margin-left: 4rem;
-  width: 30rem;
+  width: 35rem;
+}
+
+.input{
+  border: none;
+  background: none;
+  font-size: 4rem;
+  color: #00C6FF;
+  width: 15rem;
+  margin-right: 10px;
+}
+
+#result {
+  color: white;
 }
 
 .ranking-title {
@@ -165,4 +178,6 @@ ol.ranking {
 
 .replay {
   font-size: 2.5rem;
+  width: 18rem;
+  align-self: center;
 }
