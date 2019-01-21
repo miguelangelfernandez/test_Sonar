@@ -97,7 +97,8 @@ function main() {
     var player2Points = document.getElementById('player2-points');
 
     function printPoints() {
-      player1Points.textContent = game.player.points;
+      player1Points.textContent = game.player1.points;
+      player2Points.textContent = game.player2.points;
     }
 
     game.timer.startTimer();

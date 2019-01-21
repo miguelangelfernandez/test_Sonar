@@ -5,7 +5,10 @@ function Game(canvas, printTime, printPoints) {
   this.ctx = canvas.getContext('2d');
   this.gems = []
   this.meteorites = [];
-  this.player = new Player(canvas);
+  this.player1Src = './Assets/Image/astronaut1-sprite.png';
+  this.player1 = new Player(canvas, this.player1Src, 50, 100);
+  this.player2Src = './Assets/Image/astronaut2-sprite.png';
+  this.player2 = new Player(canvas, this.player2Src, 1400, 500);
   this.timer = new Timer();
   this.timer.changeTime(printTime);
   this.printPoints = printPoints;
@@ -33,7 +36,8 @@ Game.prototype.clearCanvas = function () {
 }
 
 Game.prototype.drawCanvas = function () {
-  this.player.draw();
+  this.player1.draw();
+  this.player2.draw();
   this.gems.forEach(function (gem) {
     gem.draw();
   });
@@ -42,39 +46,44 @@ Game.prototype.drawCanvas = function () {
   });
 }
 
-// Game.prototype.checkIsInScreen = function (listItems) {
-//   return filteredItems = listItems.filter(function (item){
-//     return item.isInScreen()
-//   })
-// }
+Game.prototype.checkIsInScreen = function (listItems) {
+  return listItems.filter(function (item){
+    return item.isInScreen()
+  })
+}
 
 Game.prototype.updateGame = function () {
   this.updatePlayerPosition();
   this.createParticles(this.gems, 15, this.particlesCollection[0]);
   this.createParticles(this.meteorites, 2, this.particlesCollection[1]);
-  this.printPoints(this.player);
+  // this.printPoints();
 
-  this.gems = this.gems.filter(function (gem) {
-    return gem.isInScreen();
-  });
+  this.gems = this.checkIsInScreen(this.gems);
 
-  this.meteorites = this.meteorites.filter(function (meteorite) {
-    return meteorite.isInScreen();
+  this.meteorites = this.checkIsInScreen(this.meteorites);
   });
 
 
   this.gems.forEach(function (gem) {
-    if (this.player.checkCollisions(gem)) {
+    if (this.player1.checkCollisions(gem)) {
       gem.dissapear();
-      this.player.points++;
-    };
+      this.player1.points++;
+    }
+    else if (this.player2.checkCollisions(gem)) {
+      gem.dissapear();
+      this.player2.points++;
+    }
   }.bind(this));
 
   this.meteorites.forEach(function (meteorite) {
-    if (this.player.checkCollisions(meteorite)) {
+    if (this.player1.checkCollisions(meteorite)) {
       meteorite.dissapear();
-      (this.player.points >= 5 ? this.player.points -= 5 : this.player.points = 0);
-    };
+      (this.player1.points >= 5 ? this.player1.points -= 5 : this.player1.points = 0);
+    }
+    else if (this.player2.checkCollisions(meteorite)) {
+      meteorite.dissapear();
+      (this.player2.points >= 5 ? this.player2.points -= 5 : this.player2.points = 0);      
+    }
   }.bind(this));
 
   this.gems.forEach(function (gem) {
@@ -96,26 +105,46 @@ Game.prototype.createParticles = function (typeArray, maxNumberInScreen, particl
 };
 
 Game.prototype.updatePlayerPosition = function() {
-  if (keys[87]) {  //up
-    this.player.goUp();
+  if (keys[87]) {  //up player 1
+    this.player1.goUp();
   }
 
-  else if (keys[83]) { //down
-    this.player.goDown();
+  else if (keys[83]) { //down player 1
+    this.player1.goDown();
   }
 
-  else if (keys[65]) { //left
-    this.player.goLeft();
+  else if (keys[65]) { //left player 1
+    this.player1.goLeft();
   }
 
-  else if (keys[68]) { //right
-    this.player.goRight();
-  
+  else if (keys[68]) { //right player 1
+    this.player1.goRight();
+  }
+
+  else if (keys[38]) {  //up player 2
+    this.player2.goUp();
+  }
+
+  else if (keys[40]) { //down player 2
+    this.player2.goDown();
+  }
+
+  else if (keys[37]) { //left player 2
+    this.player2.goLeft();
+  }
+
+  else if (keys[39]) { //right player 2
+      this.player2.goRight();
+
   } else {
-    this.player.srcX = 32;
-    this.player.srcY = 0;
+    this.player1.srcX = 32;
+    this.player1.srcY = 0;
+    this.player2.srcX = 32;
+    this.player2.srcY = 0;
   }
-  this.player.movement();
+
+  this.player1.movement();
+  this.player2.movement();
 }
 
 Game.prototype.start = function () {  

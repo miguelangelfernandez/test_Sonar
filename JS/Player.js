@@ -1,9 +1,9 @@
 'use strict';
 
-function Player(canvas) {
+function Player(canvas, src, x, y) {
   this.ctx = canvas.getContext('2d');
-  this.x = 50;
-  this.y = 100;
+  this.x = x;
+  this.y = y;
   this.srcX = 32;
   this.srcY = 0;
   this.velocityY = 0;
@@ -12,8 +12,7 @@ function Player(canvas) {
   this.friction = 1;
   this.size = 32;
   this.characterSpriteSheet = new Image();
-  this.characterSpriteSheet.src = './Assets/Image/astronaut1-sprite.png';
-  this.playerID;
+  this.characterSpriteSheet.src = src;
   this.points = 0;
 }
 
