@@ -106,9 +106,6 @@ function main() {
     game.start();
 
     setTimeout(function() {
-      // debugger;
-      // pointsP1 = game.player1.points;
-      // pointsP2 = game.player2.points;
       buildGameOverScreen();
 
     }, 90000);
@@ -120,7 +117,11 @@ function main() {
     var gameOverScreen = `<div class="final-screen">
     <div class="left-content">
       <h1 class="game-over">Game Over</h1>
-      <h2 id="result" class="result"></h2>
+      <h2 class="result">
+        <input class="input" id="input" type="text" placeholder="Explorer" onfocus="this.placeholder = ''">
+        <span class="flicker" id="flicker">|</span>
+        <span id="result">Won with 150 Points</span>
+      </h2>
     </div>
     <div class="right-content">
       <h2 class="ranking-title">Space Ranking</h2>
@@ -133,7 +134,7 @@ function main() {
         <li class="player-ranking">Paquito 50 Points</li>
         <li class="player-ranking">Pedro el Panadero 25 Points</li>
       </ol>
-      <a id="replay" class="replay">Insert credits to go back in Space</a>
+      <a id="replay" class="replay button">Insert credits</a>
     </div>
   </div>`;
     var pointsP1 = parseInt(document.getElementById('player1-points').textContent);
@@ -144,6 +145,11 @@ function main() {
     var result = document.getElementById('result');
     (pointsP1 > pointsP2) ? result.textContent = `Player 1 Won with ${pointsP1} Points` : result.textContent = `Player 2 Won with ${pointsP2} Points`; 
     replay.addEventListener('click', buildSplashScreen);
+
+    var flicker = document.querySelector('.flicker');
+    setInterval(function() {
+      flicker.classList.toggle('hidden');
+    }, 1000);
   }
 
 }

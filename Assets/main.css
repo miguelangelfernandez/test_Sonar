@@ -162,7 +162,11 @@ ol.ranking {
   font-size: 4rem;
   color: #00C6FF;
   width: 15rem;
-  margin-right: 10px;
+}
+
+#flicker {
+  margin-right: 5px;
+  margin-left: -10px;
 }
 
 #result {
@@ -180,4 +184,8 @@ ol.ranking {
   font-size: 2.5rem;
   width: 18rem;
   align-self: center;
+}
+
+.hidden {
+  visibility: hidden;
 }
