@@ -1,6 +1,7 @@
 'use strict';
 
 function Game(canvas, printTime, printPoints) {
+  this.presses = [];
   this.canvas = canvas;
   this.ctx = canvas.getContext('2d');
   this.gems = []
@@ -13,10 +14,9 @@ function Game(canvas, printTime, printPoints) {
   this.timer.changeTime(printTime);
   this.printPoints = printPoints;
   this.animation;
-  this.key = [];
-
+  
   this.particlesCollection = [{
-      type: 'gem',
+    type: 'gem',
       speed: 0.5,
       src: './Assets/Image/red-crystal.png',
       size: 20
@@ -103,35 +103,35 @@ Game.prototype.createParticles = function (typeArray, maxNumberInScreen, particl
 };
 
 Game.prototype.updatePlayerPosition = function() {
-  if (keys[87]) {  //up player 1
+  if (this.presses[87]) {  //up player 1
     this.player1.goUp();
   }
 
-  else if (keys[83]) { //down player 1
+  else if (this.presses[83]) { //down player 1
     this.player1.goDown();
   }
 
-  else if (keys[65]) { //left player 1
+  else if (this.presses[65]) { //left player 1
     this.player1.goLeft();
   }
 
-  else if (keys[68]) { //right player 1
+  else if (this.presses[68]) { //right player 1
     this.player1.goRight();
   }
 
-  else if (keys[38]) {  //up player 2
+  else if (this.presses[38]) {  //up player 2
     this.player2.goUp();
   }
 
-  else if (keys[40]) { //down player 2
+  else if (this.presses[40]) { //down player 2
     this.player2.goDown();
   }
 
-  else if (keys[37]) { //left player 2
+  else if (this.presses[37]) { //left player 2
     this.player2.goLeft();
   }
 
-  else if (keys[39]) { //right player 2
+  else if (this.presses[39]) { //right player 2
       this.player2.goRight();
 
   } else {
@@ -148,12 +148,12 @@ Game.prototype.updatePlayerPosition = function() {
 Game.prototype.start = function () {  
 
   window.addEventListener("keydown", function(e) {
-    this.keys[e.keyCode] = true;
-  });
+    this.presses[e.keyCode] = true;
+  }.bind(this));
   
   window.addEventListener("keyup", function(e) {
-    this.keys[e.keyCode] = false;
-  });
+    this.presses[e.keyCode] = false;
+  }.bind(this));
 
   function gameLoop() {
     this.updateGame();

@@ -6,12 +6,7 @@ function main() {
 
   var themeSound = new Audio("./Assets/Sounds/I-Robot2 Loop.wav");
   themeSound.loop = true;
-  themeSound.play().then(function(){
-    console.log('music playing')
-  })
-  .catch(function(error) {
-    console.log(error)
-  })
+  themeSound.play();
 
   function buildDom(domHtml) {
     var container = document.getElementById('container');
@@ -139,7 +134,8 @@ function main() {
     buildDom(gameOverScreen);
 
     var replay = document.getElementById('replay');
-    var winner = document.getElementById('result'); 
+    var winner = document.getElementById('result');
+    (game.player1.points > game.player2.points) ? winner.textContent = `Player 1 Won with ${game.player1.points} Points` : `Player 2 Won with ${game.player2.points} Points`; 
     replay.addEventListener('click', buildSplashScreen);
   }
 

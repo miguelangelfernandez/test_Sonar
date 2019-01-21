@@ -16,8 +16,6 @@ function Player(canvas, src, x, y) {
   this.points = 0;
 }
 
-var keys = [];
-
 Player.prototype.draw = function() {
   this.ctx.drawImage(this.characterSpriteSheet, this.srcX, this.srcY, this.size,this.size, this.x, this.y, this.size, this.size);
 }
