@@ -3,10 +3,10 @@
 // BuildDom sections
 
 function main() {
-
-  var themeSound = new Audio("./Assets/Sounds/I-Robot2 Loop.wav");
-  themeSound.loop = true;
-  themeSound.play();
+  var mainDiv = document.getElementById('container');
+  window.addEventListener("keypress", function(event) {
+    (event.keyCode === 32) ? mainDiv.classList.add('filtered') : null; 
+  });
 
   function buildDom(domHtml) {
     var container = document.getElementById('container');
@@ -28,18 +28,32 @@ function main() {
     var splashScreen = `<div class="splash-screen-container">
     <h1 class="game-title">Gravity Zero</h1>
     <div class="splash-controls-container">
-      <p class="intro">
+      <div class="intro-container">
+      <p class="intro flip">
         Collecting space gems is a tough business. Only the most skilled
         can swimm in the vacumn and survive the dangers it hides. Are you
         among them?
       </p>
-      <a id="player1" class="button" href="#">3, 2, 1,... Ejection!</a>
+      <img src="./Assets/Image/instructions.png" class="flip instructions">
+      </div>
+      <a id="play" class="button" href="#">3, 2, 1,... Ejection!</a>
     </div>
   </div>`;
 
     buildDom(splashScreen);
-    var player1 = document.getElementById('player1');
-    player1.addEventListener('click', buildGameScreen);
+    var play = document.getElementById('play');
+    var introText = document.getElementById('intro');
+
+    play.addEventListener('mouseenter', function() {
+      document.querySelector('img').style.display = 'block';
+      introText.classList.toggle('hidden');
+    });
+
+    play.addEventListener('mouseout', function() {
+      document.querySelector('img').style.display = 'hidden';
+    });
+
+    play.addEventListener('click', buildGameScreen);
   }
 
   //Start Game
@@ -47,8 +61,8 @@ function main() {
   function buildGameScreen() {
     var gameScreen = `<div class="markers-container">
     <div class="markers">
-      <span id="player1-points">10</span>
-      <span>Points</span>
+      <span id="player1-points" class="player1">10</span>
+      <span class="player1">Points</span>
     </div>
     <div class="markers">
       <span id="minDec">0</span>
@@ -58,8 +72,8 @@ function main() {
       <span id="secUni">0</span>
     </div>
     <div class="markers">
-      <span id="player2-points">10</span>
-      <span>Points</span>
+      <span id="player2-points" class="player2">10</span>
+      <span class="player2">Points</span>
     </div>
   </div>
   <canvas id="canvas" class="canvas" width="1500px" height="600px"></canvas>`;
@@ -115,10 +129,10 @@ function main() {
 
   function buildGameOverScreen() {
     var gameOverScreen = `<div class="final-screen">
-    <div class="left-content">
+    <div class="left-content" id="left-content">
       <h1 class="game-over">Game Over</h1>
       <h2 class="result">
-        <input class="input" id="input" type="text" placeholder="Explorer" maxlength="8" onfocus="this.placeholder = ''">
+        <input class="input" id="input" type="text" placeholder="Explorer" maxlength="16" onfocus="this.placeholder = ''">
         <span class="flicker" id="flicker">|</span>
         <span id="result">Won with 150 Points</span>
       </h2>
@@ -126,7 +140,6 @@ function main() {
     <div class="right-content">
       <h2 class="ranking-title">Space Ranking</h2>
       <ol id="ranking">
-      <li class="player-ranking">Pedro el Panadero 250 Points</li>
       </ol>
       <a id="replay" class="replay button">Insert credits</a>
     </div>
@@ -134,8 +147,10 @@ function main() {
 
     var pointsP1 = parseInt(document.getElementById('player1-points').textContent);
     var pointsP2 = parseInt(document.getElementById('player2-points').textContent);
+    
     buildDom(gameOverScreen);
 
+    var astronaut = document.getElementById('left-content');
     var replay = document.getElementById('replay');
     var result = document.getElementById('result');
     var winningResult = 0;
@@ -144,9 +159,12 @@ function main() {
       if (pointsP1 > pointsP2) {
         result.textContent = `Won with ${pointsP1} Points`;
         winningResult = pointsP1;
+        astronaut.style.backgroundImage = 'url(./Assets/Image/astronaut1.png)';
+
       } else {
         result.textContent = `Won with ${pointsP2} Points`;
         winningResult = pointsP2;
+        astronaut.style.backgroundImage = 'url(./Assets/Image/astronaut2.png)';
       };
     }
 
@@ -169,11 +187,11 @@ function main() {
 
     var localStorageObjectSorted = localStorageObject.sort(function(a, b){
       return b.points - a.points;
-    });
+    }).slice(0, 5);
 
     function printRankingList() {
       var ol = document.getElementById('ranking');
-      
+
       localStorageObjectSorted.forEach(function(player) {
         var li = document.createElement('li');
         li.appendChild(document.createTextNode(`${player.name} ${player.points} Points`));
