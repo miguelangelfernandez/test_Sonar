@@ -108,7 +108,7 @@ function main() {
     setTimeout(function () {
       buildGameOverScreen();
 
-    }, 9000);
+    }, 90000);
   }
 
   // Finish game
