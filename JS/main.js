@@ -108,7 +108,7 @@ function main() {
     setTimeout(function() {
       buildGameOverScreen();
 
-    }, 90000);
+    }, 9000);
   }
 
   // Finish game
@@ -118,7 +118,7 @@ function main() {
     <div class="left-content">
       <h1 class="game-over">Game Over</h1>
       <h2 class="result">
-        <input class="input" id="input" type="text" placeholder="Explorer" onfocus="this.placeholder = ''">
+        <input class="input" id="input" type="text" placeholder="Explorer" maxlength="8" onfocus="this.placeholder = ''">
         <span class="flicker" id="flicker">|</span>
         <span id="result">Won with 150 Points</span>
       </h2>
@@ -126,13 +126,7 @@ function main() {
     <div class="right-content">
       <h2 class="ranking-title">Space Ranking</h2>
       <ol class="ranking">
-        <li class="player-ranking">Anakin 200 Points</li>
-        <li class="player-ranking">Spock 190 Points</li>
-        <li class="player-ranking">Jabbah The Hut 170 Points</li>
-        <li class="player-ranking">Rick 140 Points</li>
-        <li class="player-ranking">Sheppard 120 Points</li>
-        <li class="player-ranking">Paquito 50 Points</li>
-        <li class="player-ranking">Pedro el Panadero 25 Points</li>
+      <li class="player-ranking">Pedro el Panadero 250 Points</li>
       </ol>
       <a id="replay" class="replay button">Insert credits</a>
     </div>
@@ -143,8 +137,15 @@ function main() {
 
     var replay = document.getElementById('replay');
     var result = document.getElementById('result');
-    (pointsP1 > pointsP2) ? result.textContent = `Player 1 Won with ${pointsP1} Points` : result.textContent = `Player 2 Won with ${pointsP2} Points`; 
+
+    (pointsP1 > pointsP2) ? result.textContent = `Won with ${pointsP1} Points` : result.textContent = `Won with ${pointsP2} Points`; 
     replay.addEventListener('click', buildSplashScreen);
+
+    window.addEventListener("keypress", function(e) {
+      if (e.keyCode === 13) {
+        window.localStorage.setItem(input.value, result);
+      };
+    });
 
     var flicker = document.querySelector('.flicker');
     setInterval(function() {

@@ -7,6 +7,7 @@ function Game(canvas, printTime, printPoints) {
   this.player2Presses = [];
   this.gems = []
   this.meteorites = [];
+  this.satellites = [];
   this.player1Src = './Assets/Image/astronaut1-sprite.png';
   this.player1 = new Player(canvas, this.player1Src, 50, 100);
   this.player2Src = './Assets/Image/astronaut2-sprite.png';
@@ -17,6 +18,7 @@ function Game(canvas, printTime, printPoints) {
   this.animation;  
   this.gemAudio = new Audio('./Assets/Sounds/GemSound.mp3');
   this.meteoriteAudio = new Audio('./Assets/Sounds/Comet-Sound.mp3');
+  this.satelliteAudio = new Audio('./Assets/Sounds/satelliteSound.mp3');
   this.particlesCollection = [{
     type: 'gem',
       speed: 0.5,
@@ -29,6 +31,12 @@ function Game(canvas, printTime, printPoints) {
       speed: 2,
       src: './Assets/Image/Meteorite.png',
       size: 40
+    },
+    {
+      type: 'satellite',
+      speed: 3,
+      src: './Assets/Image/satellite.png',
+      size: 30
     }
   ];
 }
@@ -46,6 +54,9 @@ Game.prototype.drawCanvas = function () {
   this.meteorites.forEach(function (meteorite) {
     meteorite.draw();
   });
+  this.satellites.forEach(function (satellite) {
+    satellite.draw();
+  });
 }
 
 Game.prototype.checkIsInScreen = function (listItems) {
@@ -58,10 +69,12 @@ Game.prototype.updateGame = function () {
   this.updatePlayer1Position();
   this.updatePlayer2Position();
   this.createParticles(this.gems, 15, this.particlesCollection[0]);
-  this.createParticles(this.meteorites, 2, this.particlesCollection[1]);
+  this.createParticles(this.meteorites, 4, this.particlesCollection[1]);
+  this.createParticles(this.satellites, 2, this.particlesCollection[2]);
   this.printPoints();
   this.gems = this.checkIsInScreen(this.gems);
   this.meteorites = this.checkIsInScreen(this.meteorites);
+  this.satellites = this.checkIsInScreen(this.satellites);
 
   this.gems.forEach(function (gem) {
     if (this.player1.checkCollisions(gem)) {
@@ -87,6 +100,7 @@ Game.prototype.updateGame = function () {
       this.player1.velocityX = 0;
       this.player1.velocityY = 0;
     }
+
     else if (this.player2.checkCollisions(meteorite)) {
       meteorite.particleImage.src = './Assets/Image/Explosion_01.png';
       meteorite.dissapear();
@@ -95,6 +109,20 @@ Game.prototype.updateGame = function () {
       this.player2.velocityX = 0;
       this.player2.velocityY = 0;
 
+    }
+  }.bind(this));
+
+  this.satellites.forEach(function (satellite) {
+    if (this.player1.checkCollisions(satellite)) {
+      this.satelliteAudio.play();
+      satellite.dissapear();
+      this.player1.points += 50;
+    }
+
+    else if (this.player2.checkCollisions(satellite)) {
+      satellite.dissapear();
+      this.satelliteAudio.play();
+      this.player2.points += 50;
     }
   }.bind(this));
 
