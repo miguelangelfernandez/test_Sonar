@@ -125,7 +125,7 @@ function main() {
     </div>
     <div class="right-content">
       <h2 class="ranking-title">Space Ranking</h2>
-      <ol class="ranking">
+      <ol id="ranking">
       <li class="player-ranking">Pedro el Panadero 250 Points</li>
       </ol>
       <a id="replay" class="replay button">Insert credits</a>
@@ -158,23 +158,39 @@ function main() {
       };
     });
 
-    var parsedLocalStorage = JSON.parse(JSON.stringify(localStorage))
+    var parsedLocalStorage = JSON.parse(JSON.stringify(localStorage));
 
     var localStorageObject = Object.keys(parsedLocalStorage).map(function (e) {
       return {
         name: e,
         points: parseInt(parsedLocalStorage[e])
       }
-    })
+    });
 
-    replay.addEventListener('click', buildSplashScreen);
+    var localStorageObjectSorted = localStorageObject.sort(function(a, b){
+      return b.points - a.points;
+    });
 
+    function printRankingList() {
+      var ol = document.getElementById('ranking');
+      
+      localStorageObjectSorted.forEach(function(player) {
+        var li = document.createElement('li');
+        li.appendChild(document.createTextNode(`${player.name} ${player.points} Points`));
+        ol.appendChild(li);
+      });
+    }
+
+    printRankingList();
+    
     var flicker = document.querySelector('.flicker');
     setInterval(function () {
       flicker.classList.toggle('hidden');
     }, 1000);
-  }
 
+    replay.addEventListener('click', buildSplashScreen);
+  }
+  
 }
 
 window.addEventListener('load', main);
