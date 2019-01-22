@@ -17,7 +17,7 @@ function main() {
 
   // Start main Screen
 
-  
+
   function loadGame() {
     buildSplashScreen();
   }
@@ -105,7 +105,7 @@ function main() {
 
     game.start();
 
-    setTimeout(function() {
+    setTimeout(function () {
       buildGameOverScreen();
 
     }, 9000);
@@ -131,24 +131,46 @@ function main() {
       <a id="replay" class="replay button">Insert credits</a>
     </div>
   </div>`;
+
     var pointsP1 = parseInt(document.getElementById('player1-points').textContent);
     var pointsP2 = parseInt(document.getElementById('player2-points').textContent);
     buildDom(gameOverScreen);
 
     var replay = document.getElementById('replay');
     var result = document.getElementById('result');
+    var winningResult = 0;
 
-    (pointsP1 > pointsP2) ? result.textContent = `Won with ${pointsP1} Points` : result.textContent = `Won with ${pointsP2} Points`; 
-    replay.addEventListener('click', buildSplashScreen);
+    function winnerText() {
+      if (pointsP1 > pointsP2) {
+        result.textContent = `Won with ${pointsP1} Points`;
+        winningResult = pointsP1;
+      } else {
+        result.textContent = `Won with ${pointsP2} Points`;
+        winningResult = pointsP2;
+      };
+    }
 
-    window.addEventListener("keypress", function(e) {
-      if (e.keyCode === 13) {
-        window.localStorage.setItem(input.value, result);
+    winnerText();
+
+    window.addEventListener("keypress", function (event) {
+      if (event.keyCode === 13) {
+        window.localStorage.setItem(input.value, winningResult);
       };
     });
 
+    var parsedLocalStorage = JSON.parse(JSON.stringify(localStorage))
+
+    var localStorageObject = Object.keys(parsedLocalStorage).map(function (e) {
+      return {
+        name: e,
+        points: parseInt(parsedLocalStorage[e])
+      }
+    })
+
+    replay.addEventListener('click', buildSplashScreen);
+
     var flicker = document.querySelector('.flicker');
-    setInterval(function() {
+    setInterval(function () {
       flicker.classList.toggle('hidden');
     }, 1000);
   }
