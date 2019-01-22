@@ -15,7 +15,7 @@ function Game(canvas, printTime, printPoints) {
   this.timer.changeTime(printTime);
   this.printPoints = printPoints;
   this.animation;  
-  this.gemAudio = new Audio('./Assets/Sounds/Stapling Paper-SoundBible.com-238116558.wav');
+  this.gemAudio = new Audio('./Assets/Sounds/GemSound.mp3');
   this.meteoriteAudio = new Audio('./Assets/Sounds/Comet-Sound.mp3');
   this.particlesCollection = [{
     type: 'gem',
@@ -84,14 +84,26 @@ Game.prototype.updateGame = function () {
       this.meteoriteAudio.play();
       meteorite.dissapear();
       (this.player1.points >= 5 ? this.player1.points -= 5 : this.player1.points = 0);
+      this.player1.velocityX = 0;
+      this.player1.velocityY = 0;
     }
     else if (this.player2.checkCollisions(meteorite)) {
       meteorite.particleImage.src = './Assets/Image/Explosion_01.png';
       meteorite.dissapear();
       this.meteoriteAudio.play();
-      (this.player2.points >= 5 ? this.player2.points -= 5 : this.player2.points = 0);      
+      (this.player2.points >= 5 ? this.player2.points -= 5 : this.player2.points = 0);
+      this.player2.velocityX = 0;
+      this.player2.velocityY = 0;
+
     }
   }.bind(this));
+
+  if (this.player1.checkCollisions(this.player2)) {
+    this.player1.velocityX *= -1;
+    this.player1.velocityY *= -1;
+    this.player2.velocityX *= -1;
+    this.player2.velocityY *= -1;
+  };
 
   this.gems.forEach(function (gem) {
     gem.updateParticle('gem');
