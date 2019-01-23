@@ -3,22 +3,28 @@
 function Game(canvas, printTime, printPoints) {
   this.canvas = canvas;
   this.ctx = canvas.getContext('2d');
-  this.player1Presses = [];
-  this.player2Presses = [];
+
   this.gems = []
   this.meteorites = [];
   this.satellites = [];
+  
+  this.player1Presses = [];
+  this.player2Presses = [];
   this.player1Src = './Assets/Image/astronaut1-sprite.png';
   this.player1 = new Player(canvas, this.player1Src, 50, 100);
   this.player2Src = './Assets/Image/astronaut2-sprite.png';
   this.player2 = new Player(canvas, this.player2Src, 1400, 500);
+  
   this.timer = new Timer();
   this.timer.changeTime(printTime);
+  
   this.printPoints = printPoints;
   this.animation;
+  
   this.gemAudio = new Audio('./Assets/Sounds/GemSound.mp3');
   this.meteoriteAudio = new Audio('./Assets/Sounds/Comet-Sound.mp3');
   this.satelliteAudio = new Audio('./Assets/Sounds/satelliteSound.mp3');
+  
   this.particlesCollection = [{
       type: 'gem',
       speed: 0.5,
@@ -71,51 +77,81 @@ Game.prototype.playersCollision = function () {
     this.player1.velocityY *= -1.1;
     this.player2.velocityX *= -1.1;
     this.player2.velocityY *= -1.1;
-  };
+  } 
 }
 
 Game.prototype.updateGame = function () {
   this.playersCollision();
   this.updatePlayer1Position();
   this.updatePlayer2Position();
+
   this.createParticles(this.gems, 15, this.particlesCollection[0]);
   this.createParticles(this.meteorites, 4, this.particlesCollection[1]);
   this.createParticles(this.satellites, 2, this.particlesCollection[2]);
+
   this.printPoints();
+
   this.gems = this.checkIsInScreen(this.gems);
   this.meteorites = this.checkIsInScreen(this.meteorites);
   this.satellites = this.checkIsInScreen(this.satellites);
 
   this.gems.forEach(function (gem) {
     if (this.player1.checkCollisions(gem)) {
+      (gem.state === 'active') ? this.player1.points++ : null;
       gem.particleImage.src = './Assets/Image/Crystal_01.png';
-      gem.dissapear();
+      gem.state = 'inactive';
+
+      setTimeout(function(){
+        gem.dissapear();
+      }, 200);
+
       this.gemAudio.play();
-      this.player1.points++;
+
     } else if (this.player2.checkCollisions(gem)) {
+      (gem.state === 'active') ? this.player2.points++ : null;
       gem.particleImage.src = './Assets/Image/Crystal_01.png';
-      gem.dissapear();
+      gem.state = 'inactive';
+
+      setTimeout(function() {
+        gem.dissapear();
+      }, 200);
+
       this.gemAudio.play();
-      this.player2.points++;
     }
   }.bind(this));
 
   this.meteorites.forEach(function (meteorite) {
     if (this.player1.checkCollisions(meteorite)) {
-      meteorite.particleImage.src = './Assets/Image/Explosion_02.png';
-      this.meteoriteAudio.play();
-      meteorite.dissapear();
-      (this.player1.points >= 50 ? this.player1.points -= 50 : this.player1.points = 0);
-      this.player1.velocityX = 0;
-      this.player1.velocityY = 0;
-    } else if (this.player2.checkCollisions(meteorite)) {
-      meteorite.particleImage.src = './Assets/Image/Explosion_02.png';
-      meteorite.dissapear();
-      this.meteoriteAudio.play();
-      (this.player2.points >= 50 ? this.player2.points -= 50 : this.player2.points = 0);
-      this.player2.velocityX = 0;
-      this.player2.velocityY = 0;
+      if (meteorite.state === 'active') {
+        (this.player1.points >= 50 ? this.player1.points -= 50 : this.player1.points = 0);
+        this.player1.velocityX = 0;
+        this.player1.velocityY = 0;
+      };
 
+      meteorite.particleImage.src = './Assets/Image/Explosion_02.png';
+      meteorite.state = 'inactive';
+
+      setTimeout(function() {
+        meteorite.dissapear();
+      }, 200);
+
+      this.meteoriteAudio.play();
+
+    } else if (this.player2.checkCollisions(meteorite)) {
+      if (meteorite.state === 'active') {
+        (this.player2.points >= 50 ? this.player2.points -= 50 : this.player2.points = 0);
+        this.player2.velocityX = 0;
+        this.player2.velocityY = 0;
+      };
+
+      meteorite.particleImage.src = './Assets/Image/Explosion_02.png';
+      meteorite.state = 'inactive';
+
+      setTimeout(function() {
+        meteorite.dissapear();
+      }, 200);
+
+      this.meteoriteAudio.play();
     }
   }.bind(this));
 

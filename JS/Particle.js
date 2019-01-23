@@ -7,6 +7,7 @@ function Particle(canvas, x, y, particleType) {
   this.particleImage = new Image();
   this.particleImage.src = particleType.src;
   this.type = particleType.type;
+  this.state = 'active';
 }
 
 Particle.prototype.draw = function () {

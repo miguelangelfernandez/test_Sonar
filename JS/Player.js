@@ -83,7 +83,3 @@ Player.prototype.checkCollisions = function(particle) {
   }
   return false;
 }
-
-
-
-
