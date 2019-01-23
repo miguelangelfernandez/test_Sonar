@@ -25,14 +25,14 @@ Particle.prototype.updateParticle = function (particleType) {
       }
       break;
     case 'meteorite':
-      this.x += this.speed;
+      this.x -= this.speed;
       this.y += this.speed;
       break;
   };
 }
 
 Particle.prototype.dissapear = function () {
-    this.x = -999;
+  this.x = -999;
 };
 
 Particle.prototype.isInScreen = function () {

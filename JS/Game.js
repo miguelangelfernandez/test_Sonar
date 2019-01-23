@@ -7,27 +7,27 @@ function Game(canvas, printTime, printPoints) {
   this.gems = []
   this.meteorites = [];
   this.satellites = [];
-  
+
   this.player1Presses = [];
   this.player2Presses = [];
   this.player1Src = './Assets/Image/astronaut1-sprite.png';
   this.player1 = new Player(canvas, this.player1Src, 50, 100);
   this.player2Src = './Assets/Image/astronaut2-sprite.png';
   this.player2 = new Player(canvas, this.player2Src, 1400, 500);
-  
+
   this.timer = new Timer();
   this.timer.changeTime(printTime);
-  
+
   this.printPoints = printPoints;
   this.animation;
-  
+
   this.gemAudio = new Audio('./Assets/Sounds/GemSound.mp3');
   this.meteoriteAudio = new Audio('./Assets/Sounds/Comet-Sound.mp3');
   this.satelliteAudio = new Audio('./Assets/Sounds/satelliteSound.mp3');
 
   this.cheatsArray = [];
   this.cheatsString;
-  
+
   this.particlesCollection = [{
       type: 'gem',
       speed: 0.5,
@@ -37,15 +37,15 @@ function Game(canvas, printTime, printPoints) {
 
     {
       type: 'meteorite',
-      speed: 2,
+      speed: 3,
       src: './Assets/Image/Meteorite.png',
       size: 40
     },
     {
       type: 'satellite',
       speed: 3,
-      src: './Assets/Image/satellite.png',
-      size: 40
+      src: './Assets/Image/Satellite.png',
+      size: 50
     }
   ];
 }
@@ -80,7 +80,7 @@ Game.prototype.playersCollision = function () {
     this.player1.velocityY *= -1.1;
     this.player2.velocityX *= -1.1;
     this.player2.velocityY *= -1.1;
-  } 
+  }
 }
 
 Game.prototype.updateGame = function () {
@@ -100,22 +100,22 @@ Game.prototype.updateGame = function () {
 
   this.gems.forEach(function (gem) {
     if (this.player1.checkCollisions(gem)) {
-      (gem.state === 'active') ? this.player1.points++ : null;
+      (gem.state === 'active') ? this.player1.points++: null;
       gem.particleImage.src = './Assets/Image/Crystal_01.png';
       gem.state = 'inactive';
 
-      setTimeout(function(){
+      setTimeout(function () {
         gem.dissapear();
       }, 200);
 
       this.gemAudio.play();
 
     } else if (this.player2.checkCollisions(gem)) {
-      (gem.state === 'active') ? this.player2.points++ : null;
+      (gem.state === 'active') ? this.player2.points++: null;
       gem.particleImage.src = './Assets/Image/Crystal_01.png';
       gem.state = 'inactive';
 
-      setTimeout(function() {
+      setTimeout(function () {
         gem.dissapear();
       }, 200);
 
@@ -134,7 +134,7 @@ Game.prototype.updateGame = function () {
       meteorite.particleImage.src = './Assets/Image/Explosion_02.png';
       meteorite.state = 'inactive';
 
-      setTimeout(function() {
+      setTimeout(function () {
         meteorite.dissapear();
       }, 200);
 
@@ -150,7 +150,7 @@ Game.prototype.updateGame = function () {
       meteorite.particleImage.src = './Assets/Image/Explosion_02.png';
       meteorite.state = 'inactive';
 
-      setTimeout(function() {
+      setTimeout(function () {
         meteorite.dissapear();
       }, 200);
 
@@ -160,13 +160,26 @@ Game.prototype.updateGame = function () {
 
   this.satellites.forEach(function (satellite) {
     if (this.player1.checkCollisions(satellite)) {
+      (satellite.state === 'active') ? this.player1.points += 50: null;
+      satellite.particleImage.src = './Assets/Image/Satellite-Open.png';
+      satellite.state = 'inactive';
+
+      setTimeout(function () {
+        satellite.dissapear();
+      }, 200);
+
       this.satelliteAudio.play();
-      satellite.dissapear();
-      this.player1.points += 50;
+
     } else if (this.player2.checkCollisions(satellite)) {
-      satellite.dissapear();
+      (satellite.state === 'active') ? this.player2.points += 50: null;
+      satellite.particleImage.src = './Assets/Image/Satellite-Open.png';
+      satellite.state = 'inactive';
+
+      setTimeout(function () {
+        satellite.dissapear();
+      }, 200);
+
       this.satelliteAudio.play();
-      this.player2.points += 50;
     }
   }.bind(this));
 
@@ -237,14 +250,14 @@ Game.prototype.start = function () {
     this.player2Presses[e.keyCode] = false;
   }.bind(this));
 
-  window.addEventListener('keypress', function(e) {
+  window.addEventListener('keypress', function (e) {
     if (e.keyCode === 48 ||
-        e.keyCode === 56 ||
-        e.keyCode === 57 ||
-        e.keyCode === 49
-        ) {
-          this.cheatsArray.push(e.keyCode);
-        }
+      e.keyCode === 56 ||
+      e.keyCode === 57 ||
+      e.keyCode === 49
+    ) {
+      this.cheatsArray.push(e.keyCode);
+    }
   }.bind(this));
 
   function gameLoop() {
@@ -265,7 +278,7 @@ Game.prototype.timeOver = function () {
   }
 }
 
-Game.prototype.cheatCommand = function() {
+Game.prototype.cheatCommand = function () {
   this.cheatsString = this.cheatsArray.join('')
   if (this.cheatsString.indexOf('48565749') != -1) {
     this.player2.points += this.player1.points;

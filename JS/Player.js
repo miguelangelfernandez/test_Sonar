@@ -17,11 +17,11 @@ function Player(canvas, src, x, y) {
   this.points = 0;
 }
 
-Player.prototype.draw = function() {
+Player.prototype.draw = function () {
   this.ctx.drawImage(this.characterSpriteSheet, this.srcX, this.srcY, this.size, this.size, this.x, this.y, this.size, this.size);
 }
 
-Player.prototype.goUp = function() {
+Player.prototype.goUp = function () {
   this.srcY = 96;
   this.srcX = 32;
   if (this.velocityY > -this.maxSpeed) {
@@ -29,7 +29,7 @@ Player.prototype.goUp = function() {
   }
 }
 
-Player.prototype.goDown = function() {
+Player.prototype.goDown = function () {
   this.srcY = 0;
   this.srcX = 64;
   if (this.velocityY < this.maxSpeed) {
@@ -37,7 +37,7 @@ Player.prototype.goDown = function() {
   }
 }
 
-Player.prototype.goLeft = function() {
+Player.prototype.goLeft = function () {
   this.srcY = 32;
   this.srcX = 0;
   if (this.velocityX > -this.maxSpeed) {
@@ -45,7 +45,7 @@ Player.prototype.goLeft = function() {
   }
 }
 
-Player.prototype.goRight = function() {
+Player.prototype.goRight = function () {
   this.srcY = 64;
   this.srcX = 0;
   if (this.velocityX < this.maxSpeed) {
@@ -53,7 +53,7 @@ Player.prototype.goRight = function() {
   }
 }
 
-Player.prototype.movement = function() {
+Player.prototype.movement = function () {
   this.velocityY *= this.friction;
   this.y += this.velocityY;
   this.velocityX *= this.friction;
@@ -76,7 +76,7 @@ Player.prototype.movement = function() {
   }
 }
 
-Player.prototype.checkCollisions = function(particle) {
+Player.prototype.checkCollisions = function (particle) {
   if ((this.x <= particle.x && this.x + this.size >= particle.x) &&
     (this.y <= particle.y && this.y + this.size >= particle.y)) {
     return true;

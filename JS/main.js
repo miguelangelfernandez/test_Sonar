@@ -4,8 +4,8 @@
 
 function main() {
   var mainDiv = document.getElementById('container');
-  window.addEventListener("keypress", function(event) {
-    (event.keyCode === 32) ? mainDiv.classList.add('filtered') : null; 
+  window.addEventListener("keypress", function (event) {
+    (event.keyCode === 32) ? mainDiv.classList.add('filtered'): null;
   });
 
   function buildDom(domHtml) {
@@ -49,12 +49,12 @@ function main() {
     var introText = document.getElementById('intro');
     var instructions = document.querySelector('img');
 
-    play.addEventListener('mouseover', function() {
+    play.addEventListener('mouseover', function () {
       instructions.classList.remove('hidden');
       introText.classList.add('hidden');
     });
 
-    play.addEventListener('mouseout', function() {
+    play.addEventListener('mouseout', function () {
       introText.classList.remove('hidden');
       instructions.classList.add('hidden');
     });
@@ -153,7 +153,7 @@ function main() {
 
     var pointsP1 = parseInt(document.getElementById('player1-points').textContent);
     var pointsP2 = parseInt(document.getElementById('player2-points').textContent);
-    
+
     buildDom(gameOverScreen);
 
     var astronaut = document.getElementById('left-content');
@@ -191,14 +191,14 @@ function main() {
       }
     });
 
-    var localStorageObjectSorted = localStorageObject.sort(function(a, b){
+    var localStorageObjectSorted = localStorageObject.sort(function (a, b) {
       return b.points - a.points;
     }).slice(0, 5);
 
     function printRankingList() {
       var ol = document.getElementById('ranking');
 
-      localStorageObjectSorted.forEach(function(player) {
+      localStorageObjectSorted.forEach(function (player) {
         var li = document.createElement('li');
         li.appendChild(document.createTextNode(`${player.name} ${player.points} Points`));
         ol.appendChild(li);
@@ -206,7 +206,7 @@ function main() {
     }
 
     printRankingList();
-    
+
     var flicker = document.querySelector('.flicker');
     setInterval(function () {
       flicker.classList.toggle('hidden');
@@ -214,7 +214,7 @@ function main() {
 
     replay.addEventListener('click', buildSplashScreen);
   }
-  
+
 }
 
 window.addEventListener('load', main);

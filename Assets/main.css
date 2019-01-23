@@ -5,7 +5,9 @@ html {
   overflow: hidden;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
@@ -16,7 +18,7 @@ body {
 
 /* Typography */
 
-h1{
+h1 {
   font-family: 'Geostar Fill', cursive;
   text-transform: capitalize;
   font-size: 10rem;
@@ -29,7 +31,13 @@ h2 {
   color: white;
 }
 
-a, span, p, li, ol, input, ::placeholder {
+a,
+span,
+p,
+li,
+ol,
+input,
+::placeholder {
   font-family: 'Josefin Slab', serif;
   text-decoration: none;
   text-transform: capitalize;
@@ -45,7 +53,7 @@ li {
 /* Layout */
 
 body {
-  background-image: url(../Assets/Image/Background.jpeg); 
+  background-image: url(../Assets/Image/Background.jpeg);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -67,6 +75,7 @@ body {
   border-radius: 50px;
   opacity: 0.6;
 }
+
 /* Splash */
 
 .splash-screen-container {
@@ -91,7 +100,7 @@ body {
   margin: 4rem 2rem 1rem 3rem;
 }
 
-.intro-container{
+.intro-container {
   position: relative;
   height: 400px;
 }
@@ -147,7 +156,8 @@ body {
   flex-direction: row;
 }
 
-.left-content, .right-content {
+.left-content,
+.right-content {
   display: flex;
   flex-direction: column;
 }
@@ -155,8 +165,8 @@ body {
 .left-content {
   background-image: url(../Assets/Image/astronaut-background.png);
   background-repeat: no-repeat;
-  background-size: 50%; 
-  background-position-y: bottom; 
+  background-size: 50%;
+  background-position-y: bottom;
 }
 
 .right-content {
@@ -183,7 +193,7 @@ ol.ranking {
   width: 35rem;
 }
 
-.input{
+.input {
   border: none;
   background: none;
   font-size: 4rem;
