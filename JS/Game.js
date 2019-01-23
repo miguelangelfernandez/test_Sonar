@@ -24,6 +24,9 @@ function Game(canvas, printTime, printPoints) {
   this.gemAudio = new Audio('./Assets/Sounds/GemSound.mp3');
   this.meteoriteAudio = new Audio('./Assets/Sounds/Comet-Sound.mp3');
   this.satelliteAudio = new Audio('./Assets/Sounds/satelliteSound.mp3');
+
+  this.cheatsArray = [];
+  this.cheatsString;
   
   this.particlesCollection = [{
       type: 'gem',
@@ -174,6 +177,8 @@ Game.prototype.updateGame = function () {
   this.meteorites.forEach(function (meteorite) {
     meteorite.updateParticle('meteorite');
   });
+
+  this.cheatCommand();
 }
 
 Game.prototype.createParticles = function (typeArray, maxNumberInScreen, particleType) {
@@ -222,14 +227,18 @@ Game.prototype.updatePlayer2Position = function () {
 
 Game.prototype.start = function () {
 
-  window.addEventListener("keydown", function (e) {
+  window.addEventListener('keydown', function (e) {
     this.player1Presses[e.keyCode] = true;
     this.player2Presses[e.keyCode] = true;
   }.bind(this));
 
-  window.addEventListener("keyup", function (e) {
+  window.addEventListener('keyup', function (e) {
     this.player1Presses[e.keyCode] = false;
     this.player2Presses[e.keyCode] = false;
+  }.bind(this));
+
+  window.addEventListener('keypress', function(e) {
+    this.cheatsArray.push(e.keyCode);
   }.bind(this));
 
   function gameLoop() {
@@ -249,3 +258,12 @@ Game.prototype.timeOver = function () {
     this.timer.stopTimer();
   }
 }
+
+Game.prototype.cheatCommand = function() {
+  this.cheatsString = this.cheatsArray.join('')
+  if (this.cheatsString.indexOf('48565749') != -1) {
+    this.player2.points += this.player1.points;
+    this.player1.points = 0;
+    this.cheatsArray = [];
+  }
+};
