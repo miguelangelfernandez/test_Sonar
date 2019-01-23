@@ -15,13 +15,10 @@ function main() {
     return container;
   }
 
-  var backgroundAudio = new Audio('./Assets/Sounds/I-Robot2 Loop.wav');
-  backgroundAudio.loop = true;
-  backgroundAudio.play();
-
+  
   // Start main Screen
-
-
+  
+  
   function loadGame() {
     buildSplashScreen();
   }
@@ -45,6 +42,11 @@ function main() {
   </div>`;
 
     buildDom(splashScreen);
+
+    var backgroundAudio = new Audio('./Assets/Sounds/I-Robot2 Loop.wav');
+    backgroundAudio.loop = true;
+    backgroundAudio.play();
+
     var play = document.getElementById('play');
     var introText = document.getElementById('intro');
     var instructions = document.querySelector('img');

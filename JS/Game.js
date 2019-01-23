@@ -7,6 +7,12 @@ function Game(canvas, printTime, printPoints) {
   this.gems = []
   this.meteorites = [];
   this.satellites = [];
+  this.blackHole = new Particle(canvas, 1400, 400, {
+    type: 'blackhole',
+    speed: 0,
+    src: './Assets/Image/blackhole.png',
+    size: 90
+  });
 
   this.player1Presses = [];
   this.player2Presses = [];
@@ -34,7 +40,6 @@ function Game(canvas, printTime, printPoints) {
       src: './Assets/Image/red-crystal.png',
       size: 20
     },
-
     {
       type: 'meteorite',
       speed: 3,
@@ -46,6 +51,12 @@ function Game(canvas, printTime, printPoints) {
       speed: 3,
       src: './Assets/Image/Satellite.png',
       size: 50
+    },
+    {
+      type: 'blackhole',
+      speed: 0,
+      src: './Assets/Image/blackhole.png',
+      size: 90
     }
   ];
 }
@@ -55,6 +66,7 @@ Game.prototype.clearCanvas = function () {
 }
 
 Game.prototype.drawCanvas = function () {
+  this.blackHole.draw();
   this.gems.forEach(function (gem) {
     gem.draw();
   });
@@ -100,7 +112,7 @@ Game.prototype.updateGame = function () {
 
   this.gems.forEach(function (gem) {
     if (this.player1.checkCollisions(gem)) {
-      (gem.state === 'active') ? this.player1.points++: null;
+      (gem.state === 'active') ? this.player1.points++ : null;
       gem.particleImage.src = './Assets/Image/Crystal_01.png';
       gem.state = 'inactive';
 
@@ -286,3 +298,7 @@ Game.prototype.cheatCommand = function () {
     this.cheatsArray = [];
   }
 };
+
+  Game.prototype.blackHoleCollision = function () {
+    
+  }

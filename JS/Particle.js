@@ -1,5 +1,6 @@
 function Particle(canvas, x, y, particleType) {
   this.ctx = canvas.getContext('2d');
+  this.canvas = canvas;
   this.x = x;
   this.y = y;
   this.speed = particleType.speed;
@@ -37,7 +38,7 @@ Particle.prototype.dissapear = function () {
 
 Particle.prototype.isInScreen = function () {
   return this.x >= 0 &&
-    this.x + this.size <= canvas.width &&
-    this.y + this.size < canvas.height &&
+    this.x + this.size <= this.canvas.width &&
+    this.y + this.size < this.canvas.height &&
     this.y >= 0;
 }
