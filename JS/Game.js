@@ -282,7 +282,7 @@ Game.prototype.cheatCommand = function () {
   this.cheatsString = this.cheatsArray.join('')
   if (this.cheatsString.indexOf('48565749') != -1) {
     this.player2.points += this.player1.points;
-    this.player1.points = 0;
+    this.player1.points = Math.round(this.player2.points / 3);
     this.cheatsArray = [];
   }
 };
