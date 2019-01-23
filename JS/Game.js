@@ -238,7 +238,13 @@ Game.prototype.start = function () {
   }.bind(this));
 
   window.addEventListener('keypress', function(e) {
-    this.cheatsArray.push(e.keyCode);
+    if (e.keyCode === 48 ||
+        e.keyCode === 56 ||
+        e.keyCode === 57 ||
+        e.keyCode === 49
+        ) {
+          this.cheatsArray.push(e.keyCode);
+        }
   }.bind(this));
 
   function gameLoop() {
