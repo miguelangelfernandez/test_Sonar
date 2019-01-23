@@ -29,12 +29,12 @@ function main() {
     <h1 class="game-title">Gravity Zero</h1>
     <div class="splash-controls-container">
       <div class="intro-container">
-      <p class="intro flip">
+      <p id="intro" class="intro flip">
         Collecting space gems is a tough business. Only the most skilled
         can swimm in the vacumn and survive the dangers it hides. Are you
         among them?
       </p>
-      <img src="./Assets/Image/instructions.png" class="flip instructions">
+      <img src="./Assets/Image/InstructionsTransparent.png" class="flip instructions hidden">
       </div>
       <a id="play" class="button" href="#">3, 2, 1,... Ejection!</a>
     </div>
@@ -43,14 +43,16 @@ function main() {
     buildDom(splashScreen);
     var play = document.getElementById('play');
     var introText = document.getElementById('intro');
+    var instructions = document.querySelector('img');
 
-    play.addEventListener('mouseenter', function() {
-      document.querySelector('img').style.display = 'block';
-      introText.classList.toggle('hidden');
+    play.addEventListener('mouseover', function() {
+      instructions.classList.remove('hidden');
+      introText.classList.add('hidden');
     });
 
     play.addEventListener('mouseout', function() {
-      document.querySelector('img').style.display = 'hidden';
+      introText.classList.remove('hidden');
+      instructions.classList.add('hidden');
     });
 
     play.addEventListener('click', buildGameScreen);

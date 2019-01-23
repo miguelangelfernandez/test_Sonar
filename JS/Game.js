@@ -36,7 +36,7 @@ function Game(canvas, printTime, printPoints) {
       type: 'satellite',
       speed: 3,
       src: './Assets/Image/satellite.png',
-      size: 30
+      size: 40
     }
   ];
 }
@@ -67,14 +67,15 @@ Game.prototype.checkIsInScreen = function (listItems) {
 
 Game.prototype.playersCollision = function () {
   if (this.player1.checkCollisions(this.player2)) {
-    this.player1.velocityX *= -1;
-    this.player1.velocityY *= -1;
-    this.player2.velocityX *= -1;
-    this.player2.velocityY *= -1;
+    this.player1.velocityX *= -1.1;
+    this.player1.velocityY *= -1.1;
+    this.player2.velocityX *= -1.1;
+    this.player2.velocityY *= -1.1;
   };
 }
 
 Game.prototype.updateGame = function () {
+  this.playersCollision();
   this.updatePlayer1Position();
   this.updatePlayer2Position();
   this.createParticles(this.gems, 15, this.particlesCollection[0]);
@@ -84,7 +85,6 @@ Game.prototype.updateGame = function () {
   this.gems = this.checkIsInScreen(this.gems);
   this.meteorites = this.checkIsInScreen(this.meteorites);
   this.satellites = this.checkIsInScreen(this.satellites);
-  this.playersCollision();
 
   this.gems.forEach(function (gem) {
     if (this.player1.checkCollisions(gem)) {

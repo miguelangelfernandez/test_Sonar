@@ -78,7 +78,7 @@ Player.prototype.movement = function() {
 
 Player.prototype.checkCollisions = function(particle) {
   if ((this.x <= particle.x && this.x + this.size >= particle.x) &&
-  (this.y <= particle.y && this.y + this.size >= particle.y)) {
+    (this.y <= particle.y && this.y + this.size >= particle.y)) {
     return true;
   }
   return false;

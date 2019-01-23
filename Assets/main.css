@@ -108,9 +108,11 @@ body {
 }
 
 .flip {
+  display: block !important;
   position: absolute;
   left: 0;
   top: 0;
+  border-radius: 35px;
 }
 
 /* Game */
@@ -212,14 +214,11 @@ ol.ranking {
   align-self: center;
 }
 
+
+/* Utility classes */
+
 .hidden {
   visibility: hidden;
-}
-
-.iframe {
-  visibility: hidden;
-  position: absolute;
-  left: -9999;
 }
 
 .filtered {
