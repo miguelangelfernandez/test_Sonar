@@ -16,6 +16,7 @@ function main() {
   }
 
   var backgroundAudio = new Audio('./Assets/Sounds/I-Robot2 Loop.wav');
+  backgroundAudio.loop = true;
   backgroundAudio.play();
 
   // Start main Screen
