@@ -83,7 +83,7 @@ function main() {
       <span class="player2">Points</span>
     </div>
   </div>
-  <canvas id="canvas" class="canvas" width="1500px" height="650px"></canvas>`;
+  <canvas id="canvas" class="canvas" width="1500px" height="600px"></canvas>`;
 
     buildDom(gameScreen);
 
