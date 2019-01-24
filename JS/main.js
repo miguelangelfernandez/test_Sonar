@@ -3,29 +3,27 @@
 // BuildDom sections
 
 function main() {
-  // window.addEventListener("keypress", function (event) {
-  //   (event.keyCode === 32) ? mainDiv.classList.add('filtered'): null;
-  // });
+	// window.addEventListener("keypress", function (event) {
+	//   (event.keyCode === 32) ? mainDiv.classList.add('filtered'): null;
+	// });
 
-  function buildDom(domHtml) {
-    var parent = document.getElementById('container');
-    parent.innerHTML = domHtml;
+	function buildDom(domHtml) {
+		var parent = document.getElementById('container');
+		parent.innerHTML = domHtml;
 
-    return parent;
-  }
+		return parent;
+	}
 
-  
-  // Start main Screen
-  
-  
-  function loadGame() {
-    buildSplashScreen();
-  }
+	// Start main Screen
 
-  loadGame()
+	function loadGame() {
+		buildSplashScreen();
+	}
 
-  function buildSplashScreen() {
-    var splashScreen = `<div class="splash-screen-container">
+	loadGame();
+
+	function buildSplashScreen() {
+		var splashScreen = `<div class="splash-screen-container">
     <h1 class="game-title">Gravity Zero</h1>
     <div class="splash-controls-container">
       <div class="intro-container">
@@ -40,33 +38,33 @@ function main() {
     </div>
   </div>`;
 
-    buildDom(splashScreen);
+		buildDom(splashScreen);
 
-    var backgroundAudio = new Audio('./Assets/Sounds/I-Robot2 Loop.wav');
-    backgroundAudio.loop = true;
-    backgroundAudio.play();
+		var backgroundAudio = new Audio('./Assets/Sounds/I-Robot2 Loop.wav');
+		backgroundAudio.loop = true;
+		backgroundAudio.play();
 
-    var play = document.getElementById('play');
-    var introText = document.getElementById('intro');
-    var instructions = document.querySelector('img');
+		var play = document.getElementById('play');
+		var introText = document.getElementById('intro');
+		var instructions = document.querySelector('img');
 
-    play.addEventListener('mouseover', function () {
-      instructions.classList.remove('hidden');
-      introText.classList.add('hidden');
-    });
+		play.addEventListener('mouseover', function() {
+			instructions.classList.remove('hidden');
+			introText.classList.add('hidden');
+		});
 
-    play.addEventListener('mouseout', function () {
-      introText.classList.remove('hidden');
-      instructions.classList.add('hidden');
-    });
+		play.addEventListener('mouseout', function() {
+			introText.classList.remove('hidden');
+			instructions.classList.add('hidden');
+		});
 
-    play.addEventListener('click', buildGameScreen);
-  }
+		play.addEventListener('click', buildGameScreen);
+	}
 
-  //Start Game
+	//Start Game
 
-  function buildGameScreen() {
-    var gameScreen = `<div class="markers-container">
+	function buildGameScreen() {
+		var gameScreen = `<div class="markers-container">
     <div class="markers">
       <span id="player1-points" class="player1">10</span>
       <span class="player1">Points</span>
@@ -85,61 +83,61 @@ function main() {
   </div>
   <canvas id="canvas" class="canvas" width="1500px" height="600px"></canvas>`;
 
-    buildDom(gameScreen);
+		buildDom(gameScreen);
 
-    var canvas = document.getElementById('canvas');
-    var game = new Game(canvas, printTime, printPoints);
+		var canvas = document.getElementById('canvas');
+		var game = new Game(canvas, printTime, printPoints);
 
-    //Timer
+		//Timer
 
-    var minDec = document.getElementById('minDec');
-    var minUni = document.getElementById('minUni');
-    var secDec = document.getElementById('secDec');
-    var secUni = document.getElementById('secUni');
+		var minDec = document.getElementById('minDec');
+		var minUni = document.getElementById('minUni');
+		var secDec = document.getElementById('secDec');
+		var secUni = document.getElementById('secUni');
 
-    function printMinutes() {
-      minDec.textContent = game.timer.minutes[0];
-      minUni.textContent = game.timer.minutes[1];
-    }
+		function printMinutes() {
+			minDec.textContent = game.timer.minutes[0];
+			minUni.textContent = game.timer.minutes[1];
+		}
 
-    function printSeconds() {
-      secDec.textContent = game.timer.seconds[0];
-      secUni.textContent = game.timer.seconds[1];
-    }
+		function printSeconds() {
+			secDec.textContent = game.timer.seconds[0];
+			secUni.textContent = game.timer.seconds[1];
+		}
 
-    function printTime() {
-      printMinutes();
-      printSeconds();
-    }
+		function printTime() {
+			printMinutes();
+			printSeconds();
+		}
 
-    // Points
+		// Points
 
-    var player1Points = document.getElementById('player1-points');
-    var player2Points = document.getElementById('player2-points');
+		var player1Points = document.getElementById('player1-points');
+		var player2Points = document.getElementById('player2-points');
 
-    function printPoints() {
-      player1Points.textContent = game.player1.points;
-      player2Points.textContent = game.player2.points;
-    }
+		function printPoints() {
+			player1Points.textContent = game.player1.points;
+			player2Points.textContent = game.player2.points;
+		}
 
-    game.timer.startTimer();
+		game.timer.startTimer();
 
-    game.start();
+		game.start();
 
-    setTimeout(function () {
-      buildGameOverScreen();
-      document.body.style.backgroundImage = 'url(./Assets/Image/Background.jpeg)';
-    }, 60000);
-  }
+		setTimeout(function() {
+			buildGameOverScreen();
+			document.body.style.backgroundImage = 'url(./Assets/Image/Background.jpeg)';
+		}, 60000);
+	}
 
-  // Finish game
+	// Finish game
 
-  function buildGameOverScreen() {
-    var gameOverScreen = `<div class="final-screen">
+	function buildGameOverScreen() {
+		var gameOverScreen = `<div class="final-screen">
     <div class="left-content" id="left-content">
       <h1 class="game-over">Game Over</h1>
       <h2 class="result">
-        <input class="input" id="input" type="text" placeholder="Explorer" maxlength="16" onfocus="this.placeholder = ''">
+        <input autocomplete='off' class="input" id="input" type="text" placeholder="Explorer" maxlength="16" onfocus="this.placeholder = ''">
         <span class="flicker" id="flicker">|</span>
         <span id="result">Won with 150 Points</span>
       </h2>
@@ -152,49 +150,47 @@ function main() {
     </div>
   </div>`;
 
-    var pointsP1 = parseInt(document.getElementById('player1-points').textContent);
-    var pointsP2 = parseInt(document.getElementById('player2-points').textContent);
-    
-    buildDom(gameOverScreen);
+		var pointsP1 = parseInt(document.getElementById('player1-points').textContent);
+		var pointsP2 = parseInt(document.getElementById('player2-points').textContent);
 
-    var astronaut = document.getElementById('left-content');
-    var replay = document.getElementById('replay');
-    var result = document.getElementById('result');
-    var winningResult = 0;
+		buildDom(gameOverScreen);
 
-    function winnerText() {
-      if (pointsP1 > pointsP2) {
-        result.textContent = `Won with ${pointsP1} Points`;
-        winningResult = pointsP1;
-        astronaut.style.backgroundImage = 'url(./Assets/Image/astronaut1.png)';
-    
-      } else {
-        result.textContent = `Won with ${pointsP2} Points`;
-        winningResult = pointsP2;
-        astronaut.style.backgroundImage = 'url(./Assets/Image/astronaut2.png)';
-      };
-    }
+		var astronaut = document.getElementById('left-content');
+		var replay = document.getElementById('replay');
+		var result = document.getElementById('result');
+		var winningResult = 0;
 
-    winnerText();
+		function winnerText() {
+			if (pointsP1 > pointsP2) {
+				result.textContent = `Won with ${pointsP1} Points`;
+				winningResult = pointsP1;
+				astronaut.style.backgroundImage = 'url(./Assets/Image/astronaut1.png)';
+			} else {
+				result.textContent = `Won with ${pointsP2} Points`;
+				winningResult = pointsP2;
+				astronaut.style.backgroundImage = 'url(./Assets/Image/astronaut2.png)';
+			}
+		}
 
-    window.addEventListener("keypress", function (event) {
-      if (event.keyCode === 13) {
-        window.localStorage.setItem(input.value, winningResult);
-        deleteRankingList();
-        printRankingList();
-      };
-    });
+		winnerText();
 
-    printRankingList();
+		window.addEventListener('keypress', function(event) {
+			if (event.keyCode === 13) {
+				window.localStorage.setItem(input.value, winningResult);
+				deleteRankingList();
+				printRankingList();
+			}
+		});
 
-    var flicker = document.querySelector('.flicker');
-    setInterval(function () {
-      flicker.classList.toggle('hidden');
-    }, 1000);
+		printRankingList();
 
-    replay.addEventListener('click', buildSplashScreen);
-  }
+		var flicker = document.querySelector('.flicker');
+		setInterval(function() {
+			flicker.classList.toggle('hidden');
+		}, 1000);
 
+		replay.addEventListener('click', buildSplashScreen);
+	}
 }
 
 window.addEventListener('load', main);
