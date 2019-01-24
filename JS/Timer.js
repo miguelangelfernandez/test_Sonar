@@ -1,5 +1,5 @@
 function Timer() {
-  this.timeLeft = 90;
+  this.timeLeft = 60;
   this.intervalId = 0;
   this.minutes;
   this.seconds;
@@ -36,7 +36,7 @@ Timer.prototype.setTime = function() {
 
 Timer.prototype.stopTimer = function() {
   clearInterval(this.intervalId);
-  this.timeLeft = 120;
+  this.timeLeft = 60;
   this.minutes = 0;
   this.seconds = 0;
 };

@@ -7,12 +7,6 @@ function Game(canvas, printTime, printPoints) {
   this.gems = []
   this.meteorites = [];
   this.satellites = [];
-  this.blackHole = new Particle(canvas, 1400, 400, {
-    type: 'blackhole',
-    speed: 0,
-    src: './Assets/Image/blackhole.png',
-    size: 90
-  });
 
   this.player1Presses = [];
   this.player2Presses = [];
@@ -51,12 +45,6 @@ function Game(canvas, printTime, printPoints) {
       speed: 3,
       src: './Assets/Image/Satellite.png',
       size: 50
-    },
-    {
-      type: 'blackhole',
-      speed: 0,
-      src: './Assets/Image/blackhole.png',
-      size: 90
     }
   ];
 }
@@ -66,7 +54,6 @@ Game.prototype.clearCanvas = function () {
 }
 
 Game.prototype.drawCanvas = function () {
-  this.blackHole.draw();
   this.gems.forEach(function (gem) {
     gem.draw();
   });
@@ -112,7 +99,7 @@ Game.prototype.updateGame = function () {
 
   this.gems.forEach(function (gem) {
     if (this.player1.checkCollisions(gem)) {
-      (gem.state === 'active') ? this.player1.points++ : null;
+      (gem.state === 'active') ? this.player1.points++: null;
       gem.particleImage.src = './Assets/Image/Crystal_01.png';
       gem.state = 'inactive';
 
@@ -293,12 +280,36 @@ Game.prototype.timeOver = function () {
 Game.prototype.cheatCommand = function () {
   this.cheatsString = this.cheatsArray.join('')
   if (this.cheatsString.indexOf('48565749') != -1) {
-    this.player2.points += this.player1.points;
-    this.player1.points = Math.round(this.player2.points / 3);
+    // this.player2.points += this.player1.points;
+    // this.player1.points = Math.round(this.player2.points / 3);
+
+    this.gems.forEach(function (gem) {
+      gem.particleImage.src = './Assets/Image/secret/gold.png';
+      gem.speed = 0;
+    });
+
+    this.meteorites.forEach(function (meteorite) {
+      meteorite.particleImage.src = './Assets/Image/secret/cactus.png';
+      meteorite.speed = 0;
+      meteorite.size = 30;
+    });
+
+    this.satellites.forEach(function (satellite) {
+      satellite.particleImage.src = './Assets/Image/secret/goldpot.png';
+    });
+
+    this.particlesCollection[0].src = './Assets/Image/secret/gold.png';
+    this.particlesCollection[0].speed = 0;
+    this.particlesCollection[1].src = './Assets/Image/secret/cactus.png';
+    this.particlesCollection[1].speed = 0;
+    this.particlesCollection[2].src = './Assets/Image/secret/goldpot.png';
+    this.particlesCollection[2].size = 30;
+    document.body.style.backgroundImage = 'url(./Assets/Image/secret/Background.jpeg)';
+    this.player1.friction = 0.95;
+    this.player2.friction = 0.95;
+    this.player1.characterSpriteSheet.src = './Assets/Image/secret/miner1.png';
+    this.player2.characterSpriteSheet.src = './Assets/Image/secret/miner2.png';
+
     this.cheatsArray = [];
   }
 };
-
-  Game.prototype.blackHoleCollision = function () {
-    
-  }

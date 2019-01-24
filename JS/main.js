@@ -9,10 +9,10 @@ function main() {
   });
 
   function buildDom(domHtml) {
-    var container = document.getElementById('container');
-    container.innerHTML = domHtml;
+    var parent = document.getElementById('container');
+    parent.innerHTML = domHtml;
 
-    return container;
+    return parent;
   }
 
   
@@ -76,7 +76,7 @@ function main() {
       <span id="minDec">0</span>
       <span id="minUni">1</span>
       <span>:</span>
-      <span id="secDec">3</span>
+      <span id="secDec">0</span>
       <span id="secUni">0</span>
     </div>
     <div class="markers">
@@ -89,7 +89,7 @@ function main() {
     buildDom(gameScreen);
 
     var canvas = document.getElementById('canvas');
-    var game = new Game(canvas, printTime, printPoints);
+    var game = new Game(canvas, printTime, printPoints, mainDiv);
 
     //Timer
 
@@ -129,8 +129,8 @@ function main() {
 
     setTimeout(function () {
       buildGameOverScreen();
-
-    }, 90000);
+      document.body.style.backgroundImage = './Assets/Image/Background.jpeg';
+    }, 60000);
   }
 
   // Finish game
@@ -155,7 +155,7 @@ function main() {
 
     var pointsP1 = parseInt(document.getElementById('player1-points').textContent);
     var pointsP2 = parseInt(document.getElementById('player2-points').textContent);
-
+    
     buildDom(gameOverScreen);
 
     var astronaut = document.getElementById('left-content');
@@ -181,23 +181,30 @@ function main() {
     window.addEventListener("keypress", function (event) {
       if (event.keyCode === 13) {
         window.localStorage.setItem(input.value, winningResult);
+        deleteRankingList();
+        printRankingList();
       };
     });
 
-    var parsedLocalStorage = JSON.parse(JSON.stringify(localStorage));
-
-    var localStorageObject = Object.keys(parsedLocalStorage).map(function (e) {
-      return {
-        name: e,
-        points: parseInt(parsedLocalStorage[e])
-      }
-    });
-
-    var localStorageObjectSorted = localStorageObject.sort(function (a, b) {
-      return b.points - a.points;
-    }).slice(0, 5);
+    function deleteRankingList() {
+      var ol = document.getElementById('ranking');
+      ol.innerHTML = '';
+    }
 
     function printRankingList() {
+      var parsedLocalStorage = JSON.parse(JSON.stringify(localStorage));
+
+      var localStorageObject = Object.keys(parsedLocalStorage).map(function (e) {
+        return {
+          name: e,
+          points: parseInt(parsedLocalStorage[e])
+        }
+      });
+  
+      var localStorageObjectSorted = localStorageObject.sort(function (a, b) {
+        return b.points - a.points;
+      }).slice(0, 5);
+
       var ol = document.getElementById('ranking');
 
       localStorageObjectSorted.forEach(function (player) {
