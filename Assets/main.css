@@ -70,7 +70,7 @@ body {
 
 .button {
   padding: 1rem 2rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   background-color: azure;
   border-radius: 50px;
@@ -89,6 +89,7 @@ body {
   padding-bottom: 3rem;
   margin-left: 1rem;
   margin-top: 4rem;
+  font-size: 7rem !important;
 }
 
 .splash-controls-container {
@@ -98,12 +99,12 @@ body {
   width: 40%;
   line-height: 1.5;
   text-align: center;
-  margin: 4rem 2rem 1rem 3rem;
+  margin: 4rem 2rem 1rem 1rem;
 }
 
 .intro-container {
   position: relative;
-  height: 400px;
+  height: 350px;
 }
 
 .intro-container img {
@@ -112,7 +113,7 @@ body {
 }
 
 .intro {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-bottom: 4rem;
 
 }
