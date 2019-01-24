@@ -309,8 +309,8 @@ Game.prototype.cheatCommand = function () {
     this.particlesCollection[2].size = 30;
 
     document.body.style.backgroundImage = 'url(./Assets/Image/secret/Background.jpeg)';
-    this.player1.friction = 0.95;
-    this.player2.friction = 0.95;
+    this.player1.friction = 0.98;
+    this.player2.friction = 0.98;
     this.player1.characterSpriteSheet.src = './Assets/Image/secret/miner1.png';
     this.player2.characterSpriteSheet.src = './Assets/Image/secret/miner2.png';
 
