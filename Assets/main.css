@@ -63,14 +63,14 @@ body {
   flex-direction: column;
   background-color: rgba(237, 201, 175, 0.03);
   width: 90vw;
-  margin-top: 5vh;
+  margin-top: 12vh;
   margin-right: 5vw;
   margin-left: 5vw;
 }
 
 .button {
   padding: 1rem 2rem;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-weight: bold;
   background-color: azure;
   border-radius: 50px;
@@ -87,9 +87,8 @@ body {
 
 .game-title {
   padding-bottom: 3rem;
-  margin-left: 1rem;
+  margin-left: 3rem;
   margin-top: 4rem;
-  font-size: 7rem !important;
 }
 
 .splash-controls-container {
@@ -104,7 +103,7 @@ body {
 
 .intro-container {
   position: relative;
-  height: 350px;
+  height: 600px;
 }
 
 .intro-container img {
@@ -113,7 +112,7 @@ body {
 }
 
 .intro {
-  font-size: 1.5rem;
+  font-size: 3rem;
   margin-bottom: 4rem;
 
 }
@@ -135,7 +134,7 @@ body {
 }
 
 .markers {
-  padding: 2rem 3rem;
+  padding: 1rem 3rem;
   width: 20rem;
   font-size: 3rem;
   font-weight: bold;
