@@ -135,6 +135,7 @@ body {
 
 .markers {
   padding: 2rem 3rem;
+  width: 20rem;
   font-size: 3rem;
   font-weight: bold;
 }
