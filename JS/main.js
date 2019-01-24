@@ -3,10 +3,9 @@
 // BuildDom sections
 
 function main() {
-  var mainDiv = document.getElementById('container');
-  window.addEventListener("keypress", function (event) {
-    (event.keyCode === 32) ? mainDiv.classList.add('filtered'): null;
-  });
+  // window.addEventListener("keypress", function (event) {
+  //   (event.keyCode === 32) ? mainDiv.classList.add('filtered'): null;
+  // });
 
   function buildDom(domHtml) {
     var parent = document.getElementById('container');
@@ -84,12 +83,12 @@ function main() {
       <span class="player2">Points</span>
     </div>
   </div>
-  <canvas id="canvas" class="canvas" width="1500px" height="600px"></canvas>`;
+  <canvas id="canvas" class="canvas" width="1500px" height="650px"></canvas>`;
 
     buildDom(gameScreen);
 
     var canvas = document.getElementById('canvas');
-    var game = new Game(canvas, printTime, printPoints, mainDiv);
+    var game = new Game(canvas, printTime, printPoints);
 
     //Timer
 
@@ -129,7 +128,7 @@ function main() {
 
     setTimeout(function () {
       buildGameOverScreen();
-      document.body.style.backgroundImage = './Assets/Image/Background.jpeg';
+      document.body.style.backgroundImage = 'url(./Assets/Image/Background.jpeg)';
     }, 60000);
   }
 
@@ -168,7 +167,7 @@ function main() {
         result.textContent = `Won with ${pointsP1} Points`;
         winningResult = pointsP1;
         astronaut.style.backgroundImage = 'url(./Assets/Image/astronaut1.png)';
-
+    
       } else {
         result.textContent = `Won with ${pointsP2} Points`;
         winningResult = pointsP2;
@@ -185,34 +184,6 @@ function main() {
         printRankingList();
       };
     });
-
-    function deleteRankingList() {
-      var ol = document.getElementById('ranking');
-      ol.innerHTML = '';
-    }
-
-    function printRankingList() {
-      var parsedLocalStorage = JSON.parse(JSON.stringify(localStorage));
-
-      var localStorageObject = Object.keys(parsedLocalStorage).map(function (e) {
-        return {
-          name: e,
-          points: parseInt(parsedLocalStorage[e])
-        }
-      });
-  
-      var localStorageObjectSorted = localStorageObject.sort(function (a, b) {
-        return b.points - a.points;
-      }).slice(0, 5);
-
-      var ol = document.getElementById('ranking');
-
-      localStorageObjectSorted.forEach(function (player) {
-        var li = document.createElement('li');
-        li.appendChild(document.createTextNode(`${player.name} ${player.points} Points`));
-        ol.appendChild(li);
-      });
-    }
 
     printRankingList();
 

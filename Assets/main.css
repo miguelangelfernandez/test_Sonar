@@ -2,7 +2,7 @@
 
 html {
   box-sizing: border-box;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 *,
@@ -46,7 +46,7 @@ input,
 }
 
 li {
-  font-size: 2rem;
+  font-size: 3rem;
   margin-bottom: 1rem;
 }
 
@@ -62,9 +62,10 @@ body {
   display: flex;
   flex-direction: column;
   background-color: rgba(237, 201, 175, 0.03);
-  width: 1500px;
-  height: 700px;
-  margin: 10% 10%;
+  width: 90vw;
+  margin-top: 10vh;
+  margin-right: 5vw;
+  margin-left: 5vw;
 }
 
 .button {
@@ -94,7 +95,7 @@ body {
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  width: 40rem;
+  width: 40%;
   line-height: 1.5;
   text-align: center;
   margin: 4rem 2rem 1rem 3rem;
@@ -102,7 +103,7 @@ body {
 
 .intro-container {
   position: relative;
-  height: 400px;
+  height: 500px;
 }
 
 .intro-container img {
@@ -111,8 +112,8 @@ body {
 }
 
 .intro {
-  font-size: 2rem;
-  margin-bottom: 7rem;
+  font-size: 2.5rem;
+  margin-bottom: 4rem;
 
 }
 
@@ -149,17 +150,20 @@ body {
 /* Final */
 
 .final-screen {
-  width: 1500px;
-  height: 700px;
   text-align: center;
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+  height: 80vh;
 }
 
 .left-content,
 .right-content {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  margin: auto 5%;
+  width: 45%;
 }
 
 .left-content {
@@ -167,10 +171,6 @@ body {
   background-repeat: no-repeat;
   background-size: 50%;
   background-position-y: bottom;
-}
-
-.right-content {
-  margin-left: 3rem;
 }
 
 ol.ranking {

@@ -280,8 +280,9 @@ Game.prototype.timeOver = function () {
 Game.prototype.cheatCommand = function () {
   this.cheatsString = this.cheatsArray.join('')
   if (this.cheatsString.indexOf('48565749') != -1) {
-    // this.player2.points += this.player1.points;
-    // this.player1.points = Math.round(this.player2.points / 3);
+
+    this.meteoriteAudio = new Audio('../Assets/Image/secret/Sounds/goldPot.wav');
+    this.gemAudio = new Audio('../Assets/Image/secret/Sounds/gold.wav');
 
     this.gems.forEach(function (gem) {
       gem.particleImage.src = './Assets/Image/secret/gold.png';
@@ -291,19 +292,22 @@ Game.prototype.cheatCommand = function () {
     this.meteorites.forEach(function (meteorite) {
       meteorite.particleImage.src = './Assets/Image/secret/cactus.png';
       meteorite.speed = 0;
-      meteorite.size = 30;
     });
 
     this.satellites.forEach(function (satellite) {
       satellite.particleImage.src = './Assets/Image/secret/goldpot.png';
+      satellite.size = 30;
     });
 
     this.particlesCollection[0].src = './Assets/Image/secret/gold.png';
     this.particlesCollection[0].speed = 0;
+
     this.particlesCollection[1].src = './Assets/Image/secret/cactus.png';
     this.particlesCollection[1].speed = 0;
+
     this.particlesCollection[2].src = './Assets/Image/secret/goldpot.png';
     this.particlesCollection[2].size = 30;
+
     document.body.style.backgroundImage = 'url(./Assets/Image/secret/Background.jpeg)';
     this.player1.friction = 0.95;
     this.player2.friction = 0.95;
