@@ -14,6 +14,7 @@ html {
 body {
   margin: 0;
   padding: 0;
+  height: 88vh;
 }
 
 /* Typography */
@@ -21,7 +22,7 @@ body {
 h1 {
   font-family: 'Geostar Fill', cursive;
   text-transform: capitalize;
-  font-size: 10rem;
+  font-size: 7rem;
   color: white;
 }
 
@@ -103,7 +104,7 @@ body {
 
 .intro-container {
   position: relative;
-  height: 600px;
+  height: 450px;
 }
 
 .intro-container img {
